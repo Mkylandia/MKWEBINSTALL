@@ -1,178 +1,359 @@
-/* Globale Stile */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #0a0a0a; /* Sehr dunkler Hintergrund */
-    color: #f0f0f0; /* Heller Text für Kontrast */
-    line-height: 1.6;
-    overflow-x: hidden; /* Verhindert horizontales Scrollen */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --primary-bg: #120A2C; /* Deep space dark purple */
+    --secondary-bg: #1A0D38; /* Slightly lighter for cards */
+    --accent-purple: #8A2BE2; /* Amethyst purple */
+    --accent-blue: #00FFFF; /* Electric blue */
+    --text-light: #E0E0FF; /* Soft white */
+    --text-dark: #A0A0B5; /* Muted text */
+    --gradient-purple-start: #6A1B9A;
+    --gradient-purple-end: #4A148C;
+    --card-border: #3A1C71;
+    --button-hover-glow: rgba(0, 255, 255, 0.5);
+    --progress-gradient-start: #00FFFF;
+    --progress-gradient-end: #8A2BE2;
 }
 
-/* Header-Bereich */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    z-index: -1;
+    opacity: 0.8;
+    animation: galaxy-move 60s infinite linear alternate, color-shift 30s infinite alternate;
+}
+
+@keyframes galaxy-move {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes color-shift {
+    0% { background-color: var(--primary-bg); }
+    50% { background-color: #0F002A; } /* Slightly different dark */
+    100% { background-color: var(--primary-bg); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 header {
+    background: linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-purple-end));
+    padding: 40px 0;
     text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #1c1c1c, #0a0a0a); /* Verlauf für den Header */
-    border-bottom: 2px solid #333;
-    animation: fadeIn 1s ease-out;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 70%);
+    animation: subtle-pulse 15s infinite ease-in-out alternate;
+}
+
+@keyframes subtle-pulse {
+    0% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.05); opacity: 0.15; }
+    100% { transform: scale(1); opacity: 0.1; }
 }
 
 header h1 {
+    font-family: 'Orbitron', sans-serif;
     font-size: 3.5em;
-    color: #4CAF50; /* Akzentfarbe */
+    color: #FFFFFF;
+    text-shadow: 0 0 15px var(--accent-blue), 0 0 25px var(--accent-purple);
     margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    letter-spacing: 2px;
+    position: relative;
+    animation: text-glow 2s infinite alternate;
 }
 
-header p {
-    font-size: 1.5em;
-    color: #bbb;
-    margin-top: 0;
+.logo-mk {
+    color: var(--accent-blue);
+    font-weight: 700;
 }
 
-/* Einführungstext */
-.intro {
+.sparkle {
+    animation: sparkle-effect 1.5s infinite ease-in-out;
+    display: inline-block;
+}
+
+@keyframes text-glow {
+    0% { text-shadow: 0 0 10px var(--accent-blue), 0 0 20px var(--accent-purple); }
+    100% { text-shadow: 0 0 15px var(--accent-blue), 0 0 30px var(--accent-purple); }
+}
+
+@keyframes sparkle-effect {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.tagline {
+    font-size: 1.3em;
+    color: var(--text-dark);
+    font-weight: 300;
+}
+
+main {
+    padding: 40px 0;
+}
+
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.download-card {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    padding: 30px;
     text-align: center;
-    padding: 40px 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.2em;
-    color: #ddd;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Feature-Kacheln */
-.features-grid {
+.download-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+    filter: blur(20px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.download-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+    border-color: var(--accent-blue);
+}
+
+.download-card:hover::before {
+    opacity: 0.3;
+}
+
+.card-icon {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    animation: icon-float 3s infinite ease-in-out alternate;
+}
+
+@keyframes icon-float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+.download-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8em;
+    color: var(--accent-blue);
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.file-info {
+    font-size: 0.9em;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 1em;
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+
+.download-btn {
+    background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+    color: #FFFFFF;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    padding: 15px 35px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-20deg);
+    transition: all 0.6s ease-in-out;
+    z-index: -1;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px var(--button-hover-glow);
+    animation: button-pulse 1s infinite alternate;
+}
+
+.download-btn:hover::before {
+    left: 100%;
+}
+
+.download-btn:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes button-pulse {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1.03); }
+}
+
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+    display: none; /* Hidden by default, shown by JS */
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end));
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-light);
+    font-size: 0.8em;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.info-section {
+    background-color: var(--secondary-bg);
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--card-border);
+}
+
+.info-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    color: var(--accent-blue);
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.info-section ul {
+    list-style: none;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    padding: 50px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 20px;
 }
 
-.feature-tile {
-    background-color: #1a1a1a; /* Dunkler Hintergrund für Kacheln */
-    border-radius: 15px;
-    padding: 30px;
-    width: calc(33% - 40px); /* 3 Kacheln pro Reihe mit Abstand */
-    min-width: 280px; /* Minimale Breite für kleine Bildschirme */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Tieferer Schatten */
-    border: 1px solid #333;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.feature-tile:hover {
-    transform: translateY(-8px); /* Leichter Schwebe-Effekt */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
-}
-
-.feature-tile h2 {
-    margin-top: 0;
-    font-size: 1.8em;
-    margin-bottom: 15px;
+.info-section li {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px 25px;
+    flex: 1 1 calc(33% - 40px); /* Approx 3 items per row */
+    min-width: 280px;
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--text-light);
+    transition: background-color 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
-/* Farben für Kachel-Titel (Emojis sind Teil des HTML) */
-.feature-tile:nth-child(1) h2 { color: #4CAF50; } /* Multisuche */
-.feature-tile:nth-child(2) h2 { color: #FFC107; } /* KI-Support */
-.feature-tile:nth-child(3) h2 { color: #2196F3; } /* Schnelles Browse */
-.feature-tile:nth-child(4) h2 { color: #E91E63; } /* Design */
-.feature-tile:nth-child(5) h2 { color: #9C27B0; } /* Bookmarks */
-.feature-tile:nth-child(6) h2 { color: #00BCD4; } /* Updates */
-
-.feature-tile p {
-    color: #bbb;
-    font-size: 1.1em;
+.info-section li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
 }
 
-/* Call to Action Sektion */
-.cta-section {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: #121212;
-    border-top: 1px solid #333;
-    margin-top: 40px;
+.bullet-icon {
+    font-size: 1.5em;
+    color: var(--accent-blue);
+    margin-right: 8px;
 }
 
-.cta-section h2 {
-    font-size: 2.5em;
-    color: #fff;
-    margin-bottom: 30px;
-}
 
-#downloadButton {
-    background-color: #4CAF50; /* Grüne Farbe für den Button */
-    color: white;
-    padding: 18px 40px;
-    border: none;
-    border-radius: 50px; /* Abgerundeter Button */
-    font-size: 1.4em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-    letter-spacing: 1px;
-    outline: none; /* Entfernt den Fokusrahmen */
-}
-
-#downloadButton:hover {
-    background-color: #5cb85c; /* Helleres Grün beim Hover */
-    transform: translateY(-3px); /* Leichter "Pop"-Effekt */
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
-}
-
-#downloadButton:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.4);
-}
-
-/* Footer */
 footer {
+    background-color: var(--primary-bg);
+    padding: 20px 0;
     text-align: center;
-    padding: 30px;
-    color: #777;
-    font-size: 0.9em;
-    background-color: #0a0a0a;
-    border-top: 1px solid #222;
+    color: var(--text-dark);
+    border-top: 1px solid var(--card-border);
+    margin-top: 50px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Responsive Design */
-@media (max-width: 992px) {
-    .feature-tile {
-        width: calc(50% - 30px); /* 2 Kacheln pro Reihe */
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     header h1 {
         font-size: 2.5em;
     }
-    header p {
-        font-size: 1.2em;
+    .tagline {
+        font-size: 1em;
     }
-    .feature-tile {
-        width: calc(100% - 20px); /* 1 Kachel pro Reihe */
-        padding: 25px;
+    .download-grid {
+        grid-template-columns: 1fr;
     }
-    .cta-section h2 {
-        font-size: 1.8em;
+    .info-section li {
+        flex: 1 1 100%;
     }
-    #downloadButton {
-        padding: 15px 30px;
-        font-size: 1.2em;
-    }
-}
-
-/* Animationen */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
