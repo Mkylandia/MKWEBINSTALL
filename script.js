@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (event) => {
             const card = event.target.closest('.download-card');
             const url = button.dataset.url;
-            const fileName = card.dataset.file; // This might be "MK WEB 6.2.zip" for MediaFire
+            const fileName = card.dataset.file;
             const fileSize = card.dataset.size;
             const progressBarContainer = card.querySelector('.progress-container');
             const progressBar = card.querySelector('.progress-bar');
@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         progressBarContainer.style.display = 'none';
                         button.style.display = 'block';
                         progressText.textContent = 'Bereit';
-                        progressBar.style.background = 'linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end))'; // Reset gradient
+                        // Reset gradient to initial if needed, or keep green for 'Download abgeschlossen'
+                        progressBar.style.background = 'linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end))';
                     }, 2000); // Display "Download abgeschlossen" for 2 seconds
                 } else {
                     progressText.textContent = `Lade herunter: ${Math.floor(currentProgress)}%`;
@@ -62,3 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Note: The React components (TiltedCard, Aurora) cannot be directly added
+// to this vanilla JavaScript file. They require a React build environment.
+// The placeholders in index.html (e.g., <div id="aurora-background">) are
+// where a React application would mount these components.
