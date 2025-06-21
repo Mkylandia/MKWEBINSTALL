@@ -1,18 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
 
 :root {
-    --primary-bg: #120A2C; /* Deep space dark purple */
-    --secondary-bg: #1A0D38; /* Slightly lighter for cards */
-    --accent-purple: #8A2BE2; /* Amethyst purple */
-    --accent-blue: #00FFFF; /* Electric blue */
-    --text-light: #E0E0FF; /* Soft white */
-    --text-dark: #A0A0B5; /* Muted text */
-    --gradient-purple-start: #6A1B9A;
-    --gradient-purple-end: #4A148C;
-    --card-border: #3A1C71;
-    --button-hover-glow: rgba(0, 255, 255, 0.5);
-    --progress-gradient-start: #00FFFF;
-    --progress-gradient-end: #8A2BE2;
+    --primary-bg: #100824; /* Even deeper space dark purple */
+    --secondary-bg: #150B2E; /* Slightly lighter for cards */
+    --accent-purple: #9A30F0; /* Brighter Amethyst purple */
+    --accent-blue: #00E5FF; /* Brighter Electric blue */
+    --text-light: #F0F0FF; /* Softer white */
+    --text-dark: #B0B0C5; /* Muted text */
+    --gradient-purple-start: #7B24C0;
+    --gradient-purple-end: #5C1D9F;
+    --card-border: #4A2B81;
+    --button-hover-glow: rgba(0, 229, 255, 0.7); /* Brighter glow */
+    --progress-gradient-start: #00E5FF;
+    --progress-gradient-end: #9A30F0;
+
+    /* New variables for TiltedCard and Aurora */
+    --tilted-card-bg: rgba(255, 255, 255, 0.08);
+    --tilted-card-border: rgba(255, 255, 255, 0.15);
+    --tilted-card-shadow: rgba(0, 0, 0, 0.6);
+    --tilted-card-text: #E0E0FF;
+    --tilted-card-overlay-bg: rgba(0, 0, 0, 0.7);
+    --tooltip-bg: #2A0E5C;
+    --tooltip-text: #E0E0FF;
 }
 
 body {
@@ -23,29 +32,23 @@ body {
     color: var(--text-light);
     line-height: 1.6;
     overflow-x: hidden; /* Prevent horizontal scroll from animations */
+    position: relative; /* For Aurora positioning */
 }
 
-.background-animation {
+/* Aurora Background */
+.aurora-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 10% 20%, var(--primary-bg) 0%, var(--secondary-bg) 100%);
-    z-index: -1;
-    opacity: 0.8;
-    animation: galaxy-move 60s infinite linear alternate, color-shift 30s infinite alternate;
+    z-index: -2; /* Below other elements */
+    opacity: 0.7; /* Adjust as needed */
+    pointer-events: none; /* Allows clicks to pass through */
 }
 
-@keyframes galaxy-move {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
-
-@keyframes color-shift {
-    0% { background-color: var(--primary-bg); }
-    50% { background-color: #0F002A; } /* Slightly different dark */
-    100% { background-color: var(--primary-bg); }
+.background-animation {
+    display: none; /* Replaced by Aurora component */
 }
 
 .container {
@@ -61,6 +64,8 @@ header {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
     position: relative;
     overflow: hidden;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 header::before {
@@ -82,11 +87,11 @@ header::before {
 
 header h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3.5em;
+    font-size: 3.8em; /* Slightly larger */
     color: #FFFFFF;
-    text-shadow: 0 0 15px var(--accent-blue), 0 0 25px var(--accent-purple);
+    text-shadow: 0 0 20px var(--accent-blue), 0 0 35px var(--accent-purple); /* Stronger glow */
     margin-bottom: 10px;
-    letter-spacing: 2px;
+    letter-spacing: 3px; /* More spacing */
     position: relative;
     animation: text-glow 2s infinite alternate;
 }
@@ -102,19 +107,20 @@ header h1 {
 }
 
 @keyframes text-glow {
-    0% { text-shadow: 0 0 10px var(--accent-blue), 0 0 20px var(--accent-purple); }
-    100% { text-shadow: 0 0 15px var(--accent-blue), 0 0 30px var(--accent-purple); }
+    0% { text-shadow: 0 0 15px var(--accent-blue), 0 0 25px var(--accent-purple); }
+    100% { text-shadow: 0 0 20px var(--accent-blue), 0 0 35px var(--accent-purple); }
 }
 
 @keyframes sparkle-effect {
     0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 0.9; } /* More pronounced sparkle */
 }
 
 .tagline {
-    font-size: 1.3em;
+    font-size: 1.4em; /* Slightly larger */
     color: var(--text-dark);
     font-weight: 300;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 main {
@@ -123,19 +129,19 @@ main {
 
 .download-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly wider cards */
+    gap: 35px; /* More gap */
     margin-top: 30px;
 }
 
 .download-card {
     background-color: var(--secondary-bg);
     border: 1px solid var(--card-border);
-    border-radius: 15px;
-    padding: 30px;
+    border-radius: 20px; /* More rounded */
+    padding: 35px; /* More padding */
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border-color 0.4s ease-in-out;
     position: relative;
     overflow: hidden;
 }
@@ -143,71 +149,74 @@ main {
 .download-card::before {
     content: '';
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
+    top: -15px; /* Larger blur area */
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
     background: linear-gradient(45deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
-    filter: blur(20px);
+    filter: blur(25px); /* Stronger blur */
     opacity: 0;
     z-index: -1;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .download-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+    transform: translateY(-15px) scale(1.03); /* More lift */
+    box-shadow: 0 20px 50px rgba(0, 229, 255, 0.4); /* Stronger hover glow */
     border-color: var(--accent-blue);
 }
 
 .download-card:hover::before {
-    opacity: 0.3;
+    opacity: 0.4; /* More visible blur */
 }
 
 .card-icon {
-    font-size: 3.5em;
-    margin-bottom: 20px;
+    font-size: 4em; /* Larger icon */
+    margin-bottom: 25px;
     animation: icon-float 3s infinite ease-in-out alternate;
+    color: var(--accent-blue); /* Ensure icon color matches theme */
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
 }
 
 @keyframes icon-float {
     0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-8px); } /* More float */
     100% { transform: translateY(0px); }
 }
 
 .download-card h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.8em;
+    font-size: 2em; /* Larger heading */
     color: var(--accent-blue);
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    margin-bottom: 12px;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
 }
 
 .file-info {
-    font-size: 0.9em;
+    font-size: 1em; /* Slightly larger */
     color: var(--text-dark);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .description {
-    font-size: 1em;
+    font-size: 1.05em; /* Slightly larger */
     color: var(--text-light);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    line-height: 1.8;
 }
 
 .download-btn {
     background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
     color: #FFFFFF;
     border: none;
-    border-radius: 50px; /* Pill shape */
-    padding: 15px 35px;
-    font-size: 1.1em;
+    border-radius: 50px;
+    padding: 18px 40px; /* More padding */
+    font-size: 1.2em; /* Larger font */
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.4s ease-in-out;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1px;
+    transition: all 0.5s ease-in-out; /* Slower transition */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+    letter-spacing: 1.5px; /* More spacing */
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -220,15 +229,15 @@ main {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: skewX(-20deg);
-    transition: all 0.6s ease-in-out;
+    background: rgba(255, 255, 255, 0.25); /* Stronger shimmer */
+    transform: skewX(-25deg); /* More skewed */
+    transition: all 0.7s ease-in-out; /* Slower shimmer */
     z-index: -1;
 }
 
 .download-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 30px var(--button-hover-glow);
+    transform: translateY(-5px) scale(1.06); /* More lift and scale */
+    box-shadow: 0 15px 40px var(--button-hover-glow);
     animation: button-pulse 1s infinite alternate;
 }
 
@@ -238,31 +247,32 @@ main {
 
 .download-btn:active {
     transform: translateY(0);
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes button-pulse {
-    0% { transform: scale(1.05); }
-    100% { transform: scale(1.03); }
+    0% { transform: scale(1.06); }
+    100% { transform: scale(1.04); }
 }
 
 .progress-container {
     width: 100%;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    margin-top: 20px;
+    height: 12px; /* Thicker bar */
+    background-color: rgba(255, 255, 255, 0.15); /* Darker background */
+    border-radius: 6px;
+    margin-top: 25px;
     overflow: hidden;
-    display: none; /* Hidden by default, shown by JS */
+    display: none;
     position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .progress-bar {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end));
-    border-radius: 5px;
-    transition: width 0.3s ease-in-out;
+    border-radius: 6px;
+    transition: width 0.4s ease-in-out;
 }
 
 .progress-text {
@@ -271,27 +281,27 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--text-light);
-    font-size: 0.8em;
+    font-size: 0.9em; /* Slightly larger */
     font-weight: 700;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
 .info-section {
     background-color: var(--secondary-bg);
-    border-radius: 15px;
-    padding: 30px;
-    margin-top: 50px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px; /* More rounded */
+    padding: 40px; /* More padding */
+    margin-top: 60px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
     border: 1px solid var(--card-border);
 }
 
 .info-section h2 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
+    font-size: 2.5em; /* Larger heading */
     color: var(--accent-blue);
     text-align: center;
-    margin-bottom: 25px;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
 }
 
 .info-section ul {
@@ -300,60 +310,209 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 25px; /* More gap */
 }
 
 .info-section li {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 15px 25px;
-    flex: 1 1 calc(33% - 40px); /* Approx 3 items per row */
-    min-width: 280px;
+    background-color: rgba(255, 255, 255, 0.07); /* Darker background */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Stronger border */
+    border-radius: 12px; /* More rounded */
+    padding: 18px 28px; /* More padding */
+    flex: 1 1 calc(33% - 50px); /* Adjust for new gap */
+    min-width: 290px;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 1.15em; /* Slightly larger */
     color: var(--text-light);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .info-section li:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-7px); /* More lift */
+    box-shadow: 0 8px 20px rgba(0, 229, 255, 0.2);
 }
 
 .bullet-icon {
-    font-size: 1.5em;
+    font-size: 1.7em; /* Larger icon */
     color: var(--accent-blue);
-    margin-right: 8px;
+    margin-right: 10px;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
 }
 
+.ki-version {
+    color: var(--accent-blue);
+    font-weight: 700;
+    text-shadow: 0 0 5px var(--accent-blue);
+}
 
 footer {
     background-color: var(--primary-bg);
-    padding: 20px 0;
+    padding: 25px 0; /* More padding */
     text-align: center;
     color: var(--text-dark);
     border-top: 1px solid var(--card-border);
-    margin-top: 50px;
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    margin-top: 60px;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 }
+
+/* TiltedCard specific styles (add to style.css) */
+/* These styles are crucial for the TiltedCard component to look correct */
+.tilted-card-figure {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Important for 3D effect */
+    margin: 0;
+    background-color: var(--tilted-card-bg); /* Use new variable */
+    border: 1px solid var(--tilted-card-border); /* Use new variable */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--tilted-card-shadow); /* Use new variable */
+    overflow: hidden;
+}
+
+.tilted-card-inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s linear; /* Adjust for Framer Motion spring */
+}
+
+.tilted-card-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.tilted-card-caption {
+    position: absolute;
+    padding: 8px 12px;
+    background-color: var(--tooltip-bg); /* Use new variable */
+    color: var(--tooltip-text); /* Use new variable */
+    border-radius: 5px;
+    font-size: 0.9em;
+    pointer-events: none; /* Crucial: ensures it doesn't block mouse events */
+    white-space: nowrap;
+    z-index: 10;
+    transform: translate(-50%, -120%); /* Position above cursor */
+}
+
+.tilted-card-mobile-alert {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    z-index: 10;
+    display: none; /* Hidden by default, can be shown with media query or JS */
+}
+
+@media (max-width: 768px) {
+    .tilted-card-mobile-alert {
+        display: block; /* Show warning on mobile */
+    }
+    .tilted-card-figure {
+        /* Disable tilt effect on mobile */
+        transform: none !important;
+        box-shadow: 0 5px 15px var(--tilted-card-shadow);
+    }
+    .tilted-card-inner {
+        transform: none !important;
+    }
+    .tilted-card-caption {
+        display: none !important; /* Hide tooltip on mobile */
+    }
+}
+
+.tilted-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--tilted-card-overlay-bg); /* Use new variable */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none; /* Allow clicks to pass through initially */
+}
+
+.tilted-card-figure:hover .tilted-card-overlay {
+    opacity: 1;
+    pointer-events: auto; /* Enable clicks on hover */
+}
+
+
+/* Aurora.css for the Aurora component */
+.aurora-container canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2.5em;
+        font-size: 2.8em; /* Adjusted for smaller screens */
+        letter-spacing: 1.5px;
     }
     .tagline {
-        font-size: 1em;
+        font-size: 1.1em;
     }
     .download-grid {
         grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .download-card {
+        padding: 25px;
+    }
+    .download-card h2 {
+        font-size: 1.6em;
+    }
+    .download-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+    .info-section {
+        padding: 30px;
+    }
+    .info-section h2 {
+        font-size: 2em;
     }
     .info-section li {
         flex: 1 1 100%;
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    .bullet-icon {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2em;
+    }
+    .tagline {
+        font-size: 0.9em;
+    }
+    .download-card h2 {
+        font-size: 1.4em;
     }
 }
