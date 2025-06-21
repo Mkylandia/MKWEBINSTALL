@@ -1,70 +1,84 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const downloadButtons = document.querySelectorAll('.download-btn');
+    const downloadButton = document.querySelector('.cta-button'); // Targeting the main download button
 
-    downloadButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const card = event.target.closest('.download-card');
-            const url = button.dataset.url;
-            const fileName = card.dataset.file;
-            const fileSize = card.dataset.size;
-            const progressBarContainer = card.querySelector('.progress-container');
-            const progressBar = card.querySelector('.progress-bar');
-            const progressText = card.querySelector('.progress-text');
+    if (downloadButton) {
+        downloadButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default link behavior immediately
 
-            // Hide the button and show the progress bar
-            button.style.display = 'none';
-            progressBarContainer.style.display = 'block';
+            const url = downloadButton.dataset.url;
+            const fileName = downloadButton.dataset.file;
+            const progressContainer = document.querySelector('.progress-container');
+            const progressBar = document.querySelector('.progress-bar');
+            const progressText = document.querySelector('.progress-text');
+
+            // Initial state for download process
+            downloadButton.style.display = 'none';
+            progressContainer.style.display = 'block';
             progressBar.style.width = '0%';
-            progressText.textContent = 'Starte Download...';
+            progressText.textContent = 'Initialisiere sicheren Download...';
 
-            console.log(`Attempting to download: ${fileName} from ${url}`);
+            console.log(`Starte Download von: ${fileName} von ${url}`);
 
-            // Important Note:
-            // For external links like MediaFire, this JavaScript simulation
-            // will NOT reflect the actual download progress.
-            // The browser's native download manager (e.g., MKWEB's QWebEngineDownloadRequest)
-            // will handle the actual download and its progress bar.
-            // This simulation is purely for visual feedback on THIS website.
-
-            // Simulate download progress
+            // Simulate a more advanced download process
             let currentProgress = 0;
-            const downloadInterval = setInterval(() => {
-                currentProgress += Math.random() * 10; // Simulate variable download speed
-                if (currentProgress >= 100) {
-                    currentProgress = 100;
-                    clearInterval(downloadInterval);
-                    progressText.textContent = 'Download abgeschlossen!';
-                    progressBar.style.width = '100%';
-                    progressBar.style.background = 'linear-gradient(90deg, #28a745, #218838)'; // Green on complete
-                    // Optional: Re-enable button or show a "Downloaded" message after a delay
-                    setTimeout(() => {
-                        progressBarContainer.style.display = 'none';
-                        button.style.display = 'block';
-                        progressText.textContent = 'Bereit';
-                        // Reset gradient to initial if needed, or keep green for 'Download abgeschlossen'
-                        progressBar.style.background = 'linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end))';
-                    }, 2000); // Display "Download abgeschlossen" for 2 seconds
+            const phases = [
+                { text: 'Verbinde mit MKWEB Servern...', duration: 1000, increment: 5 },
+                { text: 'Download optimieren für Ihre Hardware...', duration: 1500, increment: 10 },
+                { text: 'Übertrage Datenpakete...', duration: 5000, increment: 20 },
+                { text: 'Integrität der Daten prüfen...', duration: 2000, increment: 10 },
+                { text: 'Finale Kompilierung...', duration: 1500, increment: 5 }
+            ];
+            let currentPhase = 0;
+            let phaseStartTime = Date.now();
+
+            const animateDownload = () => {
+                if (currentPhase < phases.length) {
+                    const phase = phases[currentPhase];
+                    const elapsed = Date.now() - phaseStartTime;
+                    const phaseProgress = Math.min(1, elapsed / phase.duration);
+                    
+                    // Ensure progress doesn't jump backward
+                    const targetProgress = Math.min(100, currentProgress + phase.increment * phaseProgress);
+                    progressBar.style.width = `${targetProgress}%`;
+                    progressText.textContent = `${phase.text} ${Math.floor(targetProgress)}%`;
+
+                    if (elapsed >= phase.duration) {
+                        currentProgress += phase.increment;
+                        currentPhase++;
+                        phaseStartTime = Date.now();
+                        if (currentPhase < phases.length) {
+                             // Set text for next phase immediately
+                             progressText.textContent = `${phases[currentPhase].text} ${Math.floor(targetProgress)}%`;
+                        }
+                    }
+                    requestAnimationFrame(animateDownload);
                 } else {
-                    progressText.textContent = `Lade herunter: ${Math.floor(currentProgress)}%`;
-                    progressBar.style.width = `${currentProgress}%`;
+                    // Final steps once simulation reaches near 100%
+                    progressBar.style.width = '100%';
+                    progressBar.style.background = 'linear-gradient(90deg, #00FFB0, #00E0FF)'; // Green/Blue on complete
+                    progressText.textContent = 'Download abgeschlossen! Installiere ...';
+
+                    // Trigger actual file download
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+                    // Revert UI after a short delay
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        downloadButton.style.display = 'flex'; // Use flex for CTA button
+                        progressBar.style.width = '0%'; // Reset for next download
+                        progressBar.style.background = 'linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end))';
+                        progressText.textContent = 'Bereit';
+                        alert('Ihr Download von MKWEB Quantum wurde gestartet. Bitte überprüfen Sie Ihren Download-Ordner.');
+                    }, 3000); // Show "Download abgeschlossen" for 3 seconds
                 }
-            }, 300); // Update every 300ms
+            };
 
-            // Initiate the actual download.
-            // For a direct file download (or an external link like MediaFire),
-            // simply setting window.location.href or creating a temporary link.
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = fileName; // Suggests the filename to the browser
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
+            animateDownload(); // Start the download animation
         });
-    });
+    }
 });
-
-// Note: The React components (TiltedCard, Aurora) cannot be directly added
-// to this vanilla JavaScript file. They require a React build environment.
-// The placeholders in index.html (e.g., <div id="aurora-background">) are
-// where a React application would mount these components.
