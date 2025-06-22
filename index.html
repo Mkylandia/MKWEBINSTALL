@@ -3,42 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MKWEB 7 - Dein Browser der nächsten Generation</title>
+    <title>MKWEB - Dein Neuer Browser</title>
     <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <body>
-    <div id="background-animation"></div> <header>
-        <h1>MKWEB 7</h1>
-        <p>Dein Browser der nächsten Generation – Smart, Schnell & Sicher.</p>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">MKWEB</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section id="features">
-            <h2>Features, die begeistern:</h2>
-            <ul>
-                <li>**KI-Multisuche:** Intelligente Suchergebnisse aus verschiedenen Quellen.</li>
-                <li>**Neue Benutzeroberfläche (UI):** Elegant und intuitiv gestaltet.</li>
-                <li>**Integrierter Adblocker:** Surfe ungestört und werbefrei.</li>
-            </ul>
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="logo-animation-container">
+                    <div class="mk-logo-box">
+                        <span class="mk-text">MK</span>
+                    </div>
+                </div>
+                <h1>Erlebe das Web Neu mit MKWEB 8</h1>
+                <p>Schnell, sicher und wunderschön. Mit **intelligenter KI-Unterstützung** und **Multisearch** ist MKWEB, in der **Software Version 5**, dein Browser für die Zukunft.</p>
+                <a href="#" class="download-button" id="downloadNowButton">Jetzt Herunterladen</a>
+            </div>
         </section>
 
-        <section id="download">
-            <h2>Bereit für MKWEB 7?</h2>
-            <p>Erlebe ein völlig neues Browser-Erlebnis.</p>
-            <a href="https://www.mediafire.com/file/gj1zztzcqhnohw8/MKWEB+7+(2).zip/file" class="download-button" download>
-                MKWEB 7 jetzt herunterladen
-            </a>
-            <p class="install-instructions">
-                **Wichtige Installationsanleitung:**<br>
-                Nach dem Download entpacke die ZIP-Datei und lege den gesamten Inhalt auf deinen Desktop.
-            </p>
+        <section id="features" class="features-section">
+            <h2>Warum MKWEB?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Rasend schnell</h3>
+                    <p>Lade Seiten blitzschnell und ohne Verzögerung. Optimiere dein Surferlebnis.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Absolute Sicherheit</h3>
+                    <p>Schütze deine Daten mit fortschrittlichen Sicherheitsfunktionen und Privatsphäre-Einstellungen.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Wunderschönes Design</h3>
+                    <p>Ein minimalistisches und intuitives Design, das sich an deine Bedürfnisse anpasst.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>KI-Assistent an Bord</h3>
+                    <p>Profitiere von einer intelligenten KI, die dein Surfen optimiert und dir personalisierte Unterstützung bietet.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Multisearch Funktion</h3>
+                    <p>Suche gleichzeitig auf mehreren Plattformen und finde Informationen schneller als je zuvor.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Lokale Datenspeicherung</h3>
+                    <p>Deine Dateien, Passwörter und wichtigen Daten werden sicher und ausschließlich lokal auf deinem Gerät gespeichert.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="call-to-action-section">
+            <h2>Bereit für MKWEB?</h2>
+            <p>Beginne noch heute dein besseres Surferlebnis.</p>
+            <a href="#" class="download-button" id="downloadBottomButton">Jetzt Herunterladen</a>
         </section>
     </main>
 
-    <footer>
+    <footer class="main-footer" id="contact">
         <p>&copy; 2025 MKWEB. Alle Rechte vorbehalten.</p>
+        <div class="footer-links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+        </div>
     </footer>
 
     <script src="script.js"></script>
-    </body>
+</body>
 </html>
