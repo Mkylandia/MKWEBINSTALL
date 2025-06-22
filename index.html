@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header">
@@ -16,7 +17,7 @@
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#download">Download</a></li>
-                </ul>
+            </ul>
         </nav>
     </header>
 
@@ -24,40 +25,46 @@
         <section class="hero-section">
             <div class="hero-content">
                 <div class="logo-animation-container">
-                    <div class="mk-logo-box">
+                    <div class="mk-logo-inner">
                         <span class="mk-text">MK</span>
+                        <div class="mk-gloss-overlay"></div>
                     </div>
                 </div>
-                <h1>Erlebe das Web Neu mit MKWEB 8</h1>
-                <p>Schnell, sicher und wunderschön. Mit **intelligenter KI-Unterstützung** und **Multisearch** ist MKWEB, in der **Software Version 5**, dein Browser für die Zukunft.</p>
-                <a href="https://www.mediafire.com/file/mqm4rzqqcx2k5c0/MKWEB+8.exe/file" class="download-button" id="downloadNowButton">Jetzt Herunterladen</a>
+                <h1 class="animate-on-load">Erlebe das Web Neu mit MKWEB 8</h1>
+                <p class="animate-on-load">Schnell, sicher und wunderschön. Mit **intelligenter KI-Unterstützung** und **Multisearch** ist MKWEB, in der **Software Version 5**, dein Browser für die Zukunft.</p>
+                <a href="https://www.mediafire.com/file/mqm4rzqqcx2k5c0/MKWEB+8.exe/file" class="download-button animate-on-load" id="downloadNowButton">Jetzt Herunterladen</a>
+            </div>
+            <div class="hero-bg-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
             </div>
         </section>
 
         <section id="features" class="features-section">
-            <h2>Warum MKWEB?</h2>
+            <h2 class="gsap-reveal">Warum MKWEB?</h2>
             <div class="feature-grid">
-                <div class="feature-item">
+                <div class="feature-item gsap-reveal">
                     <h3>Rasend schnell</h3>
                     <p>Lade Seiten blitzschnell und ohne Verzögerung. Optimiere dein Surferlebnis.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item gsap-reveal">
                     <h3>Absolute Sicherheit</h3>
                     <p>Schütze deine Daten mit fortschrittlichen Sicherheitsfunktionen und Privatsphäre-Einstellungen.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item gsap-reveal">
                     <h3>Wunderschönes Design</h3>
                     <p>Ein minimalistisches und intuitives Design, das sich an deine Bedürfnisse anpasst.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item gsap-reveal">
                     <h3>KI-Assistent an Bord</h3>
                     <p>Profitiere von einer intelligenten KI, die dein Surfen optimiert und dir personalisierte Unterstützung bietet.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item gsap-reveal">
                     <h3>Multisearch Funktion</h3>
                     <p>Suche gleichzeitig auf mehreren Plattformen und finde Informationen schneller als je zuvor.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature-item gsap-reveal">
                     <h3>Lokale Datenspeicherung</h3>
                     <p>Deine Dateien, Passwörter und wichtigen Daten werden sicher und ausschließlich lokal auf deinem Gerät gespeichert.</p>
                 </div>
@@ -65,9 +72,9 @@
         </section>
 
         <section id="download" class="call-to-action-section">
-            <h2>Bereit für MKWEB?</h2>
-            <p>Beginne noch heute dein besseres Surferlebnis.</p>
-            <a href="https://www.mediafire.com/file/mqm4rzqqcx2k5c0/MKWEB+8.exe/file" class="download-button" id="downloadBottomButton">Jetzt Herunterladen</a>
+            <h2 class="gsap-reveal">Bereit für MKWEB?</h2>
+            <p class="gsap-reveal">Beginne noch heute dein besseres Surferlebnis.</p>
+            <a href="https://www.mediafire.com/file/mqm4rzqqcx2k5c0/MKWEB+8.exe/file" class="download-button gsap-reveal" id="downloadBottomButton">Jetzt Herunterladen</a>
         </section>
     </main>
 
@@ -76,9 +83,11 @@
         <div class="footer-links">
             <a href="#">Impressum</a>
             <a href="#">Datenschutz</a>
-            </div>
+        </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
