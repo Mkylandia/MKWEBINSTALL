@@ -1,95 +1,103 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+    // Diese Funktion wird ausgeführt, sobald das gesamte HTML-Dokument geladen und geparst ist.
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+    // 1. Sanftes Scrollen für Navigationslinks
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Überprüfen, ob der Anker ein gültiges Ziel hat (z.B. nicht nur "#")
+        if (anchor.getAttribute('href').length > 1) {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Verhindert das Standardverhalten des Links (sofortiges Springen)
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth' // Sorgt für sanftes Scrollen
+                    });
+                }
             });
-        });
+        }
     });
 
-    // Intersection Observer for fade-in animations on scroll
-    const faders = document.querySelectorAll('.fade-in');
+    // 2. Intersection Observer für Fade-in-Animationen beim Scrollen
+    const faders = document.querySelectorAll('.fade-in'); // Wählt alle Elemente mit der Klasse 'fade-in'
 
     const appearOptions = {
-        threshold: 0.1, // Element is 10% visible
-        rootMargin: "0px 0px -50px 0px" // Adjust when element enters viewport
+        threshold: 0.1, // Das Element muss zu 10% im Viewport sein, damit der Effekt ausgelöst wird
+        rootMargin: "0px 0px -50px 0px" // Startet den Effekt 50px früher, bevor das Element vollständig sichtbar ist
     };
 
-    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
             if (!entry.isIntersecting) {
+                // Wenn das Element nicht sichtbar ist, mache nichts oder setze es zurück (hier: nichts)
                 return;
             } else {
-                entry.target.classList.add('visible');
-                appearOnScroll.unobserve(entry.target); // Stop observing once visible
+                // Wenn das Element sichtbar wird
+                entry.target.classList.add('visible'); // Fügt die 'visible'-Klasse hinzu (für Fade-in)
+                observer.unobserve(entry.target); // Beobachtung einstellen, da der Effekt einmalig ist
             }
         });
     }, appearOptions);
 
-    faders.forEach(fader => {
-        appearOnScroll.observe(fader);
+    // Füge die 'fade-in'-Klasse zu den Abschnitten hinzu, die animiert werden sollen
+    // Stelle sicher, dass diese Klassen auch im HTML vorhanden sind!
+    const sectionsToFade = [
+        document.querySelector('.hero-section'),
+        document.querySelector('.features-section'),
+        document.querySelector('.call-to-action-section')
+    ];
+
+    sectionsToFade.forEach(section => {
+        if (section) { // Überprüfe, ob das Element existiert
+            section.classList.add('fade-in');
+            appearOnScroll.observe(section); // Starte die Beobachtung
+        }
     });
 
-    // Add .fade-in to sections you want to animate
-    document.querySelector('.hero-section').classList.add('fade-in');
-    document.querySelector('.features-section').classList.add('fade-in');
-    document.querySelector('.call-to-action-section').classList.add('fade-in');
 
-    // Simple hover effect for the MK logo (more complex 3D would require a library)
+    // 3. Interaktiver 3D-Effekt für das MK-Logo auf Mausbewegung
     const mkLogoBox = document.querySelector('.mk-logo-box');
-    if (mkLogoBox) {
+    if (mkLogoBox) { // Stelle sicher, dass das Element existiert
+        const maxRotation = 18; // Maximale Rotationsgrade
+        const rect = mkLogoBox.getBoundingClientRect(); // Initial Rect
+
         mkLogoBox.addEventListener('mousemove', (e) => {
-            const rect = mkLogoBox.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element.
-            const y = e.clientY - rect.top;  // y position within the element.
+            // Aktualisiere die Rect, da sich das Element durch Scrollen bewegen könnte
+            const currentRect = mkLogoBox.getBoundingClientRect();
+            const x = e.clientX - currentRect.left; // X-Position relativ zum Element
+            const y = e.clientY - currentRect.top;  // Y-Position relativ zum Element
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+            // Berechne die Rotation basierend auf der Mausposition
+            // Maus links -> dreht nach rechts (positive Y-Achse)
+            // Maus oben -> dreht nach unten (positive X-Achse)
+            const rotateY = ((x / currentRect.width) * 2 - 1) * -maxRotation; // -1 bis 1, dann multipliziert
+            const rotateX = ((y / currentRect.height) * 2 - 1) * maxRotation; // -1 bis 1, dann multipliziert
 
-            const rotateY = ((x - centerX) / centerX) * 15; // Max 15 deg rotation
-            const rotateX = ((centerY - y) / centerY) * 15; // Max 15 deg rotation
-
-            mkLogoBox.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            mkLogoBox.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
         mkLogoBox.addEventListener('mouseleave', () => {
-            mkLogoBox.style.transform = `perspective(1000px) rotateX(10deg) rotateY(20deg)`; // Reset to initial
+            // Setze die Transformation auf den ursprünglichen Zustand zurück
+            mkLogoBox.style.transform = `perspective(1200px) rotateX(15deg) rotateY(25deg)`; // Originalwerte aus CSS
         });
     }
 
-    // Example of a "krasser Übergang" (more noticeable) for the download buttons
+    // 4. "Krasse" Puls-Animation für Download-Buttons beim Klick
     const downloadButtons = document.querySelectorAll('.download-button');
     downloadButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            // Prevent default link behavior for demonstration purposes,
-            // you'd typically want the link to work.
-            // e.preventDefault();
+            // e.preventDefault(); // Normalerweise würdest du das nicht brauchen, wenn der Link direkt auf die Datei zeigt.
+                               // Wenn du eine eigene Download-Logik hast, dann ja.
 
-            // Add a class for a short, intense animation
+            // Füge die Animationsklasse hinzu
             button.classList.add('pulse-animation');
 
-            // Remove the class after the animation finishes
+            // Entferne die Klasse nach der Animationsdauer, damit sie erneut ausgelöst werden kann
             setTimeout(() => {
                 button.classList.remove('pulse-animation');
-                // In a real scenario, after the animation, you might trigger the actual download
-                // window.location.href = button.href;
-            }, 500); // Match this duration to your CSS animation
+            }, 600); // Muss mit der Dauer der CSS-Animation (@keyframes pulse) übereinstimmen (hier 0.6s)
         });
     });
 });
-
-// CSS for the pulse-animation (add this to your style.css if you use the JS animation above)
-/*
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
-    50% { transform: scale(1.05); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
-    100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
-}
-
-.pulse-animation {
-    animation: pulse 0.5s ease-in-out;
-}
-*/
