@@ -1,209 +1,374 @@
-/* Globale Stile & Reset */
+/* General Styles */
 :root {
-    --primary-color: #00bcd4; /* Ein schönes Türkis für Akzente */
-    --secondary-color: #673ab7; /* Ein dunkles Lila als Ergänzung */
-    --text-color: #e0e0e0; /* Helles Grau für Text */
-    --background-dark: #121212; /* Sehr dunkler Hintergrund */
-    --card-background: #1e1e1e; /* Etwas helleres Dunkel für Boxen */
-    --border-radius: 8px;
-    --transition-speed: 0.3s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --primary-color: #000; /* Black for text and main elements */
+    --secondary-color: #fff; /* White for background */
+    --accent-color: #666; /* Light gray for subtle details */
+    --button-bg: #000;
+    --button-text: #fff;
+    --hover-bg: #333;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--background-dark);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden; /* Verhindert horizontales Scrollen */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative; /* Für absolute Positionierung des Hintergrunds */
-}
-
-/* Hintergrundanimation (Aurora/3D) */
-#background-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Hier würden die Stile für den Aurora-Effekt oder die 3D-Canvas platziert werden */
-    /* Beispiel für einen einfachen Farbverlauf als Platzhalter */
-    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
-    background-size: 200% 200%;
-    animation: gradientShift 15s ease infinite;
-    z-index: -1; /* Hinter dem Inhalt */
-    opacity: 0.7; /* Leicht transparent */
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-
-/* Header */
-header {
-    text-align: center;
-    padding: 4rem 1rem 2rem;
-    position: relative;
-    z-index: 1;
-}
-
-header h1 {
-    font-size: 4em;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 15px rgba(0, 188, 212, 0.6); /* Leichter Glüheffekt */
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll from transitions */
 }
 
-header p {
-    font-size: 1.5em;
-    max-width: 800px;
-    margin: 0 auto;
-    color: var(--text-color);
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-/* Main Content */
-main {
-    flex-grow: 1;
-    padding: 2rem 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
+a:hover {
+    color: var(--accent-color);
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 section {
-    background-color: var(--card-background);
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Dezenter Rand */
-}
-
-section h2 {
-    color: var(--primary-color);
-    font-size: 2.5em;
-    margin-bottom: 1.5rem;
+    padding: 80px 20px;
     text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-section ul {
+/* Header & Navigation */
+.main-header {
+    background-color: var(--secondary-color);
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.nav-links {
     list-style: none;
+    margin: 0;
     padding: 0;
+    display: flex;
 }
 
-section ul li {
-    font-size: 1.2em;
-    margin-bottom: 1rem;
-    padding-left: 25px;
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    font-weight: 700;
+    font-size: 1.1rem;
     position: relative;
 }
 
-section ul li::before {
-    content: '✨'; /* Ein Glitzer-Emoji als Aufzählungszeichen */
+.nav-links a::after {
+    content: '';
     position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
     left: 0;
-    color: var(--primary-color);
+    background: var(--primary-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    position: relative;
+    overflow: hidden; /* For potential background animations */
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    max-width: 700px;
+    opacity: 0.8;
 }
 
 /* Download Button */
 .download-button {
-    display: block;
-    width: fit-content;
-    margin: 2.5rem auto;
-    padding: 1.2rem 3rem;
-    background-color: var(--primary-color);
-    color: var(--background-dark);
-    text-decoration: none;
-    font-size: 1.8em;
-    font-weight: bold;
-    border-radius: 50px; /* Abgerundeter Button */
-    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
-    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4);
+    display: inline-block;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .download-button:hover {
-    background-color: #00a8be; /* Etwas dunkler beim Hover */
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 188, 212, 0.6);
+    transform: translateY(-5px);
+    background-color: var(--hover-bg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.install-instructions {
-    text-align: center;
-    font-size: 1.1em;
-    margin-top: 1.5rem;
-    color: var(--text-color);
+/* MK Logo Animation Container (Placeholder for 3D) */
+.logo-animation-container {
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    margin: 0 auto 40px auto;
+    perspective: 1000px; /* For 3D effect */
+}
+
+.mk-logo-box {
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Main black color as in the image */
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(20deg) rotateX(10deg); /* Initial slight 3D rotation */
+    transition: transform 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    border-radius: 15px; /* Slight rounding for the box */
+}
+
+.mk-logo-box:hover {
+    transform: rotateY(-20deg) rotateX(-10deg); /* Hover animation */
+}
+
+.mk-text {
+    color: #fff; /* White for MK text */
+    font-size: 5rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1; /* Ensure text is above potential inner elements if you add them */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* You would add more pseudo-elements or div for the white gradient part of the 3D box */
+/* For example: */
+.mk-logo-box::before {
+    content: '';
+    position: absolute;
+    top: -5%;
+    right: -5%;
+    width: 60%;
+    height: 60%;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    transform: translateZ(-50px) rotateY(-45deg); /* Pushing it back and rotating */
+    border-radius: 15px;
+    opacity: 0.7;
+    pointer-events: none; /* Make it unclickable */
+    transition: transform 1s ease-in-out;
+}
+
+.mk-logo-box:hover::before {
+    transform: translateZ(-50px) rotateY(45deg);
+}
+
+
+/* Features Section */
+.features-section {
     background-color: var(--secondary-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    padding: 80px 20px;
+}
+
+.features-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: var(--primary-color);
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    text-align: left;
+}
+
+.feature-item {
+    background-color: var(--secondary-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid var(--primary-color); /* Add a touch of the brand color */
+}
+
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature-item h3 {
+    font-size: 1.7rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    color: var(--accent-color);
+}
+
+/* Call to Action Section */
+.call-to-action-section {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 80px 20px;
+}
+
+.call-to-action-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.call-to-action-section p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
 }
 
 /* Footer */
-footer {
+.main-footer {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    padding: 40px 20px;
     text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 3rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9em;
-    position: relative;
-    z-index: 1;
+    font-size: 0.9rem;
 }
+
+.main-footer .footer-links {
+    margin-top: 15px;
+}
+
+.main-footer .footer-links a {
+    color: var(--accent-color);
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.main-footer .footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Animations and Transitions (Placeholder for "Krasse Übergänge") */
+
+/* Fade-in effect for sections */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Example of a more "krass" transition on button hover (already implemented above) */
+/* .download-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    background-color: var(--hover-bg);
+} */
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 3em;
+    .navbar {
+        flex-direction: column;
     }
 
-    header p {
-        font-size: 1.2em;
+    .nav-links {
+        margin-top: 20px;
+        flex-direction: column;
+        align-items: center;
     }
 
-    section h2 {
-        font-size: 2em;
+    .nav-links li {
+        margin: 10px 0;
     }
 
-    .download-button {
-        font-size: 1.5em;
-        padding: 1rem 2rem;
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logo-animation-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .mk-text {
+        font-size: 4rem;
     }
 }
 
 @media (max-width: 480px) {
-    header h1 {
-        font-size: 2.5em;
-    }
-
-    header p {
-        font-size: 1em;
-    }
-
-    section {
-        padding: 1.5rem;
-    }
-
-    section h2 {
-        font-size: 1.8em;
-    }
-
-    section ul li {
-        font-size: 1em;
+    .logo {
+        font-size: 1.5rem;
     }
 
     .download-button {
-        font-size: 1.2em;
-        padding: 0.8rem 1.8rem;
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 60px 15px;
     }
 }
