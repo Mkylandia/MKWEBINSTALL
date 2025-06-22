@@ -1,11 +1,22 @@
+/* Grundlegende CSS-Reset- oder Normalisierungsregeln */
+*, *::before, *::after {
+    box-sizing: border-box; /* Stellt sicher, dass Padding und Border in der Breite enthalten sind */
+    margin: 0;
+    padding: 0;
+}
+
 /* General Styles */
 :root {
-    --primary-color: #000; /* Black for text and main elements */
-    --secondary-color: #fff; /* White for background */
-    --accent-color: #666; /* Light gray for subtle details */
+    --primary-color: #000; /* Schwarz für Text und Hauptelemente */
+    --secondary-color: #fff; /* Weiß für Hintergrund */
+    --accent-color: #666; /* Helles Grau für subtile Details */
     --button-bg: #000;
     --button-text: #fff;
-    --hover-bg: #333;
+    --hover-bg: #333; /* Etwas helleres Schwarz für Hover-Effekte */
+}
+
+html {
+    scroll-behavior: smooth; /* Sanftes Scrollen für Anker-Links */
 }
 
 body {
@@ -15,8 +26,16 @@ body {
     background-color: var(--secondary-color);
     color: var(--primary-color);
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll from transitions */
+    overflow-x: hidden; /* Verhindert horizontalen Scrollbalken durch Überläufe */
+    min-height: 100vh; /* Stellt sicher, dass der Body mindestens die Höhe des Viewports einnimmt */
+    display: flex;
+    flex-direction: column; /* Damit Footer unten bleibt */
 }
+
+main {
+    flex: 1; /* Nimmt den verfügbaren Platz ein, schiebt Footer nach unten */
+}
+
 
 a {
     color: var(--primary-color);
@@ -37,7 +56,7 @@ section {
     padding: 80px 20px;
     text-align: center;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; /* Zentriert die Sektionen */
 }
 
 /* Header & Navigation */
@@ -65,6 +84,7 @@ section {
     font-weight: 700;
     color: var(--primary-color);
     text-transform: uppercase;
+    letter-spacing: 1px; /* Verbessert die Lesbarkeit des Logos */
 }
 
 .nav-links {
@@ -82,6 +102,7 @@ section {
     font-weight: 700;
     font-size: 1.1rem;
     position: relative;
+    padding-bottom: 5px; /* Platz für den Underline-Effekt */
 }
 
 .nav-links a::after {
@@ -90,16 +111,14 @@ section {
     width: 0;
     height: 2px;
     display: block;
-    margin-top: 5px;
-    right: 0;
+    margin-top: 5px; /* Abstand zur Schrift */
+    left: 0; /* Von links beginnen */
     background: var(--primary-color);
     transition: width 0.3s ease;
 }
 
 .nav-links a:hover::after {
     width: 100%;
-    left: 0;
-    background: var(--primary-color);
 }
 
 /* Hero Section */
@@ -111,27 +130,31 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
+    min-height: 80vh; /* Etwas höher, um mehr des Viewports einzunehmen */
     position: relative;
-    overflow: hidden; /* For potential background animations */
+    overflow: hidden; /* Für potenzielle Hintergrundanimationen */
 }
 
 .hero-content {
     z-index: 2;
     position: relative;
+    text-align: center; /* Stellt sicher, dass Text zentriert ist */
+    max-width: 900px; /* Begrenzt die Breite des Textes */
 }
 
 .hero-section h1 {
-    font-size: 3.5rem;
-    margin-bottom: 15px;
-    letter-spacing: -1px;
+    font-size: 3.8rem; /* Etwas größer */
+    margin-bottom: 20px;
+    letter-spacing: -1.5px;
 }
 
 .hero-section p {
-    font-size: 1.3rem;
-    margin-bottom: 40px;
+    font-size: 1.4rem; /* Etwas größer */
+    margin-bottom: 50px;
     max-width: 700px;
-    opacity: 0.8;
+    opacity: 0.9; /* Etwas weniger transparent */
+    margin-left: auto; /* Zentriert den Paragraphen */
+    margin-right: auto; /* Zentriert den Paragraphen */
 }
 
 /* Download Button */
@@ -139,120 +162,123 @@ section {
     display: inline-block;
     background-color: var(--button-bg);
     color: var(--button-text);
-    padding: 15px 30px;
+    padding: 18px 35px; /* Etwas größerer Button */
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Etwas größere Schrift im Button */
     font-weight: 700;
     text-transform: uppercase;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
 }
 
 .download-button:hover {
-    transform: translateY(-5px);
+    transform: translateY(-7px); /* Mehr Bewegung beim Hover */
     background-color: var(--hover-bg);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Stärkerer Schatten */
 }
 
 /* MK Logo Animation Container (Placeholder for 3D) */
 .logo-animation-container {
-    width: 200px; /* Adjust size as needed */
-    height: 200px;
-    margin: 0 auto 40px auto;
-    perspective: 1000px; /* For 3D effect */
+    width: 220px; /* Etwas größer */
+    height: 220px;
+    margin: 0 auto 50px auto; /* Mehr Abstand */
+    perspective: 1200px; /* Stärkere 3D-Perspektive */
 }
 
 .mk-logo-box {
     width: 100%;
     height: 100%;
-    background-color: #000; /* Main black color as in the image */
+    background-color: #000; /* Hauptfarbe */
     position: relative;
     transform-style: preserve-3d;
-    transform: rotateY(20deg) rotateX(10deg); /* Initial slight 3D rotation */
-    transition: transform 1s ease-in-out;
+    transform: rotateY(25deg) rotateX(15deg); /* Initiale 3D-Rotation */
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Sanftere Transition */
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow */
-    border-radius: 15px; /* Slight rounding for the box */
+    box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.6); /* Stärkerer Schatten */
+    border-radius: 20px; /* Etwas runder */
+    overflow: hidden; /* Wichtig für innenliegende Pseudo-Elemente */
 }
 
 .mk-logo-box:hover {
-    transform: rotateY(-20deg) rotateX(-10deg); /* Hover animation */
+    transform: rotateY(-25deg) rotateX(-15deg); /* Hover-Animation */
 }
 
 .mk-text {
-    color: #fff; /* White for MK text */
-    font-size: 5rem;
+    color: #fff; /* Weiß für MK Text */
+    font-size: 6rem; /* Größerer Text */
     font-weight: 700;
     position: relative;
-    z-index: 1; /* Ensure text is above potential inner elements if you add them */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4); /* Stärkerer Textschatten */
 }
 
-/* You would add more pseudo-elements or div for the white gradient part of the 3D box */
-/* For example: */
+/* Für den weißen Gradienten-Part des 3D-Blocks (wie im Bild) */
 .mk-logo-box::before {
     content: '';
     position: absolute;
-    top: -5%;
-    right: -5%;
-    width: 60%;
-    height: 60%;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-    transform: translateZ(-50px) rotateY(-45deg); /* Pushing it back and rotating */
-    border-radius: 15px;
-    opacity: 0.7;
-    pointer-events: none; /* Make it unclickable */
-    transition: transform 1s ease-in-out;
+    top: -10%;
+    right: -10%;
+    width: 70%; /* Größerer Gradientenbereich */
+    height: 70%;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+    transform: translateZ(-80px) rotateY(-55deg); /* Tiefer und stärker gedreht */
+    border-radius: 20px;
+    opacity: 0.8;
+    pointer-events: none;
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 0; /* Hinter dem Text */
 }
 
 .mk-logo-box:hover::before {
-    transform: translateZ(-50px) rotateY(45deg);
+    transform: translateZ(-80px) rotateY(55deg);
 }
 
 
 /* Features Section */
 .features-section {
     background-color: var(--secondary-color);
-    padding: 80px 20px;
+    padding: 100px 20px; /* Mehr Padding */
 }
 
 .features-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 60px;
+    font-size: 3rem; /* Größerer Titel */
+    margin-bottom: 70px;
     color: var(--primary-color);
 }
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Breitere Min-Breite */
+    gap: 50px; /* Mehr Abstand zwischen den Items */
     text-align: left;
 }
 
 .feature-item {
     background-color: var(--secondary-color);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: 5px solid var(--primary-color); /* Add a touch of the brand color */
+    padding: 35px; /* Mehr Padding */
+    border-radius: 12px; /* Etwas runder */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Stärkerer Schatten */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-top: 6px solid var(--primary-color); /* Dickere Oberkante */
 }
 
 .feature-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-12px); /* Mehr Bewegung */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Noch stärkerer Schatten */
 }
 
 .feature-item h3 {
-    font-size: 1.7rem;
+    font-size: 1.8rem; /* Etwas größere Überschrift */
     color: var(--primary-color);
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    line-height: 1.3;
 }
 
 .feature-item p {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Etwas größere Schrift */
     color: var(--accent-color);
 }
 
@@ -260,37 +286,38 @@ section {
 .call-to-action-section {
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    padding: 80px 20px;
+    padding: 100px 20px; /* Mehr Padding */
 }
 
 .call-to-action-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 3rem; /* Größerer Titel */
+    margin-bottom: 25px;
     color: var(--secondary-color);
 }
 
 .call-to-action-section p {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-    opacity: 0.8;
+    font-size: 1.3rem; /* Etwas größere Schrift */
+    margin-bottom: 50px;
+    opacity: 0.9;
 }
 
 /* Footer */
 .main-footer {
     background-color: var(--primary-color);
     color: var(--accent-color);
-    padding: 40px 20px;
+    padding: 50px 20px; /* Mehr Padding */
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    margin-top: auto; /* Schiebt den Footer ganz nach unten, wenn der Inhalt zu kurz ist */
 }
 
 .main-footer .footer-links {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .main-footer .footer-links a {
     color: var(--accent-color);
-    margin: 0 15px;
+    margin: 0 20px; /* Mehr Abstand */
     transition: color 0.3s ease;
 }
 
@@ -303,7 +330,7 @@ section {
 /* Fade-in effect for sections */
 .fade-in {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px); /* Etwas mehr Verschiebung */
     transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
@@ -312,15 +339,34 @@ section {
     transform: translateY(0);
 }
 
-/* Example of a more "krass" transition on button hover (already implemented above) */
-/* .download-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    background-color: var(--hover-bg);
-} */
+/* Pulse-Animation für Download-Button (für JS-Trigger) */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+    50% { transform: scale(1.06); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); /* Intensiver */ }
+    100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+}
+
+.pulse-animation {
+    animation: pulse 0.6s ease-in-out; /* Etwas länger und intensiver */
+}
 
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    .hero-section h1 {
+        font-size: 3rem;
+    }
+    .hero-section p {
+        font-size: 1.2rem;
+    }
+    .features-section h2, .call-to-action-section h2 {
+        font-size: 2.5rem;
+    }
+    .mk-text {
+        font-size: 5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -349,12 +395,12 @@ section {
     }
 
     .logo-animation-container {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
     }
 
     .mk-text {
-        font-size: 4rem;
+        font-size: 4.5rem;
     }
 }
 
@@ -370,5 +416,25 @@ section {
 
     section {
         padding: 60px 15px;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 0.9rem;
+    }
+
+    .features-section h2, .call-to-action-section h2 {
+        font-size: 2rem;
+    }
+    .mk-text {
+        font-size: 3.5rem;
+    }
+    .mk-logo-box::before {
+        width: 80%;
+        height: 80%;
+        transform: translateZ(-60px) rotateY(-45deg);
     }
 }
