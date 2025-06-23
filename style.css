@@ -478,10 +478,11 @@ section {
 /* Enhanced Call to Action Section */
 .call-to-action-section {
     background: var(--gradient-primary);
-    color: var(--secondary-color); /* Textfarbe weiß */
+    color: var(--secondary-color); /* Textfarbe weiß gesetzt*/
     padding: clamp(80px, 10vw, 120px) 20px;
     position: relative;
     overflow: hidden;
+    text-align: center; /* Zentriert den Text in diesem Abschnitt */
 }
 
 .call-to-action-section::before {
@@ -503,7 +504,7 @@ section {
 
 .call-to-action-section h2 {
     margin-bottom: 30px;
-    color: var(--secondary-color); /* Textfarbe weiß */
+    color: var(--secondary-color); /* Textfarbe weiß gesetzt*/
     position: relative;
     z-index: 1;
 }
@@ -517,6 +518,7 @@ section {
     margin-right: auto;
     position: relative;
     z-index: 1;
+    color: var(--secondary-color); /* Textfarbe weiß gesetzt*/
 }
 
 /* Enhanced Footer */
@@ -726,7 +728,7 @@ section {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color: #fff; /* Primärfarbe für Dark Mode ist Weiß */
+        --primary-color: #fff;
         --secondary-color: #0a0a0a;
         --accent-color: #aaa;
         --accent-light: #666;
