@@ -44,7 +44,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--secondary-color);
-    color: var(--primary-color);
+    color: var(--primary-color); /* Standardtextfarbe */
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -98,7 +98,7 @@ p {
 /* Section Improvements */
 section {
     padding: clamp(60px, 8vw, 120px) 20px;
-    text-align: center;
+    text-align: center; /* Zentriert den Text in allen Sektionen */
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
@@ -189,7 +189,7 @@ section {
 /* Enhanced Hero Section */
 .hero-section {
     background: var(--gradient-primary);
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* Textfarbe weiß */
     padding: clamp(80px, 12vw, 140px) 20px;
     display: flex;
     flex-direction: column;
@@ -216,6 +216,7 @@ section {
     position: relative;
     max-width: 800px;
     animation: fadeInUp 1s ease-out;
+    text-align: center; /* Zentriert den Text innerhalb des Hero-Contents */
 }
 
 .hero-section h1 {
@@ -235,6 +236,8 @@ section {
     opacity: 0.9;
     font-weight: 400;
     line-height: 1.7;
+    margin-left: auto; /* Zentriert den Absatz */
+    margin-right: auto; /* Zentriert den Absatz */
 }
 
 /* Enhanced Download Button */
@@ -243,7 +246,7 @@ section {
     align-items: center;
     justify-content: center;
     background: var(--gradient-primary);
-    color: var(--button-text);
+    color: var(--button-text); /* Bleibt weiß */
     padding: 18px 40px;
     border-radius: 50px;
     font-size: 1.1rem;
@@ -309,7 +312,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 
+    box-shadow:
         0 0 0 1px rgba(255, 255, 255, 0.1),
         0 20px 60px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -319,7 +322,7 @@ section {
 
 .mk-logo-box:hover {
     transform: rotateY(-25deg) rotateX(-15deg) scale(1.05);
-    box-shadow: 
+    box-shadow:
         0 0 0 1px rgba(255, 255, 255, 0.2),
         0 30px 80px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -331,14 +334,14 @@ section {
     font-weight: 900;
     position: relative;
     z-index: 1;
-    text-shadow: 
+    text-shadow:
         2px 2px 8px rgba(0, 0, 0, 0.5),
         0 0 20px rgba(255, 255, 255, 0.1);
     transition: all var(--transition-medium);
 }
 
 .mk-logo-box:hover .mk-text {
-    text-shadow: 
+    text-shadow:
         2px 2px 12px rgba(0, 0, 0, 0.7),
         0 0 30px rgba(255, 255, 255, 0.2);
 }
@@ -421,7 +424,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 40px;
-    text-align: left;
+    text-align: left; /* Behält die Textausrichtung für Feature-Items bei */
 }
 
 .feature-item {
@@ -433,6 +436,7 @@ section {
     border: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
+    text-align: center; /* Zentriert den Text innerhalb jedes Feature-Items */
 }
 
 .feature-item::before {
@@ -474,7 +478,7 @@ section {
 /* Enhanced Call to Action Section */
 .call-to-action-section {
     background: var(--gradient-primary);
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* Textfarbe weiß */
     padding: clamp(80px, 10vw, 120px) 20px;
     position: relative;
     overflow: hidden;
@@ -499,14 +503,14 @@ section {
 
 .call-to-action-section h2 {
     margin-bottom: 30px;
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* Textfarbe weiß */
     position: relative;
     z-index: 1;
 }
 
 .call-to-action-section p {
     font-size: 1.2rem;
-    margin-bottom: 50px;
+    margin-bottom: 20px; /* Reduziert den unteren Abstand, da es nun mehr P-Tags gibt */
     opacity: 0.9;
     max-width: 600px;
     margin-left: auto;
@@ -654,7 +658,7 @@ section {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 30px;
     }
-    
+
     .nav-links {
         gap: 30px;
     }
@@ -722,7 +726,7 @@ section {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color: #fff;
+        --primary-color: #fff; /* Primärfarbe für Dark Mode ist Weiß */
         --secondary-color: #0a0a0a;
         --accent-color: #aaa;
         --accent-light: #666;
