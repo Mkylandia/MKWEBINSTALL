@@ -1,53 +1,95 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>MK Web X – Der Browser der Zukunft</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Three.js für 3D-Animationen -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r142/three.min.js" defer></script>
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MK Web Browser - Dein Tor zur Zukunft</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="hero">
-    <canvas id="scene3d"></canvas>
-    <div class="hero-content">
-      <h1>MK Web X</h1>
-      <p>Der Browser der Zukunft: Schneller. Sicherer. KI-gestützt.</p>
-      <nav class="downloads">
-        <a href="https://www.mediafire.com/file/05phf5dd7zr92lt/MKWEB_X_%2528P1%2529.exe/file" class="btn">Download P1</a>
-        <a href="https://www.mediafire.com/file/jbp6sbbyc99908x/MKWEB_X_%2528P2%2529.exe/file" class="btn">Download P2</a>
-        <a href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="btn primary">Download P3 (Neueste)</a>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <div class="header-content">
+            <h1>MK Web Browser</h1>
+            <p>Die Zukunft des Surfens hat begonnen.</p>
+        </div>
+    </header>
 
-  <main>
-    <section class="features">
-      <h2>Features</h2>
-      <ul>
-        <li><strong>Futuristisches Design</strong> mit anpassbaren Themes</li>
-        <li><strong>Künstliche Intelligenz</strong> für intelligente Suche & Empfehlungen</li>
-        <li><strong>Multisuche</strong> – nutze Google, Bing, DuckDuckGo gleichzeitig</li>
-        <li><strong>Sicherheit</strong> durch Sandbox-Modus und Tracking-Schutz</li>
-        <li><strong>Lokaler Datenspeicher</strong> für Offline-Notizen & Lesezeichen</li>
-      </ul>
-    </section>
+    <main>
+        <section id="hero" class="animated-background">
+            <div class="hero-text">
+                <h2>Eine neue Dimension des Surfens</h2>
+                <p>Willkommen in der Zukunft des Browsens! MK Web ist nicht nur ein Browser, sondern eine völlig neue Erfahrung, die Geschwindigkeit, Sicherheit und künstliche Intelligenz in einem atemberaubenden Design vereint. Tauche ein in eine Welt, in der deine Online-Interaktionen nahtlos, intelligent und absolut sicher sind.</p>
+            </div>
+            <div class="browser-mockup">
+                <img src="https://via.placeholder.com/600x400/0A192F/00E7FF?text=Futuristischer+Browser-Mockup" alt="Futuristischer Browser Mockup">
+            </div>
+        </section>
 
-    <section class="tutorial">
-      <h2>Tutorial: MK Web X als Standard-Browser einstellen</h2>
-      <ol>
-        <li>Öffne den Browser und klicke oben rechts auf <strong>Extras → MK Web X</strong>.</li>
-        <li>Wähle <strong>Als Standard-Browser registrieren</strong>.</li>
-        <li>Wechsle in Windows zu <strong>Einstellungen → Apps → Standard-Apps</strong>.</li>
-        <li>Gib in der Suchleiste <strong>MK Web</strong> ein und wähle es als Standard.</li>
-      </ol>
-    </section>
-  </main>
+        <section id="features">
+            <h2>Was macht MK Web einzigartig?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Futuristisches Design</h3>
+                    <p>Eine intuitive Benutzeroberfläche mit eleganten Animationen und einem modernen Look, der das Surfen zum Vergnügen macht.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>KI-gestützte Funktionen</h3>
+                    <p>Erlebe intelligentes Browse, das sich deinen Bedürfnissen anpasst und dir hilft, Informationen schneller zu finden und Aufgaben effizienter zu erledigen.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Multi-Suchmaschine</h3>
+                    <p>Wechsle mühelos zwischen verschiedenen Suchmaschinen oder durchsuche sie gleichzeitig, um die umfassendsten Ergebnisse zu erhalten.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Höchste Sicherheit</h3>
+                    <p>Mit modernsten Verschlüsselungstechnologien und proaktiven Schutzfunktionen sind deine Daten und deine Privatsphäre stets geschützt.</p>
+                <div class="feature-item">
+                    <h3>Lokaler Datenspeicher</h3>
+                    <p>Verwalte deine Downloads, Lesezeichen und Einstellungen sicher und bequem direkt auf deinem Gerät.</p>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 MK Web X. Alle Rechte vorbehalten.</p>
-  </footer>
+        <section id="models">
+            <h2>Wähle deine Version:</h2>
+            <p>Entdecke die verschiedenen Modelle von MK Web, jedes optimiert für deine individuellen Anforderungen.</p>
+        </section>
+
+        <section id="downloads">
+            <h2>Downloads</h2>
+            <p>Hier sind die Links zu den verschiedenen MK Web-Versionen. <strong>MK WEB P3 ist die neueste und empfohlene Version.</strong></p>
+            <div class="download-links">
+                <a href="https://www.mediafire.com/file/05phf5dd7zr92lt/MKWEB_X_%2528P1%2529.exe/file" class="download-button" target="_blank">MK WEB P1 (Ältere Version)</a>
+                <a href="https://www.mediafire.com/file/jbp6sbbyc99908x/MKWEB_X_%2528P2%2529.exe/file" class="download-button" target="_blank">MK WEB P2 (Stabile Version)</a>
+                <a href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="download-button primary" target="_blank">MK WEB P3 (Neueste Version)</a>
+            </div>
+        </section>
+
+        <section id="tutorial">
+            <h2>Tutorial: MK Web als Standardbrowser festlegen</h2>
+            <p>Nachdem du MK Web heruntergeladen und installiert hast, folge diesen Schritten, um ihn als deinen Standardbrowser festzulegen und das volle Potenzial zu nutzen:</p>
+            <ol>
+                <li>Im MK Web Browser: Öffne MK Web und navigiere zu <strong>"Extras"</strong> im Menü.</li>
+                <li><strong>"Mein Browser" wählen</strong>: Klicke auf <strong>"Mein Browser"</strong>.</li>
+                <li><strong>Als Standardbrowser registrieren</strong>: Wähle <strong>"Als Standardbrowser registrieren"</strong>. MK Web wird versuchen, sich automatisch zu registrieren.</li>
+                <li><strong>Windows Einstellungen anpassen</strong>: Falls MK Web nicht automatisch als Standardbrowser festgelegt wird oder du dies manuell überprüfen möchtest:
+                    <ul>
+                        <li>Öffne die <strong>Windows-Einstellungen</strong> (drücke <kbd>Win</kbd> + <kbd>I</kbd>).</li>
+                        <li>Klicke auf <strong>"Apps"</strong>.</li>
+                        <li>Wähle <strong>"Standard-Apps"</strong> in der linken Navigation.</li>
+                        <li>Scrolle nach unten oder nutze die Suchleiste und tippe <strong>"MK Web"</strong> ein, um den Browser zu finden.</li>
+                        <li>Klicke auf <strong>"MK Web"</strong> und stelle sicher, dass es als Standard für Webbrowser und andere relevante Dateitypen festgelegt ist.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MK Web Browser. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
