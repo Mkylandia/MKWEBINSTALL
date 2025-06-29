@@ -3,106 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK web - Der Browser der Zukunft</title>
+    <title>MK web - Experience Browsing Anew</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <!-- Icon-Bibliothek für minimalistische Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <nav>
-            <div class="logo">MK <span>web</span></div>
-        </nav>
+        <div class="logo">MK <span>web</span></div>
     </header>
 
     <main>
-        <!-- ========= HERO SECTION ========= -->
+        <!-- ========= HERO SECTION mit interaktiver Maus-Animation ========= -->
         <section id="hero">
             <div class="hero-content">
-                <div class="cube-container">
-                    <div class="cube">
-                        <div class="face front">MK</div>
-                        <div class="face back"></div>
-                        <div class="face right"></div>
-                        <div class="face left"></div>
-                        <div class="face top"></div>
-                        <div class="face bottom"></div>
-                    </div>
-                </div>
-                <h1>Erlebe das Web der Zukunft</h1>
-                <p class="subtitle">Schneller, intelligenter und sicherer als je zuvor.</p>
-                <a href="#downloads" class="cta-button">Jetzt Herunterladen</a>
+                <h1 class="animated-gradient">Das Web. Neu Erfunden.</h1>
+                <p class="subtitle" id="hero-spotlight">Ein Browser, der sich auf Geschwindigkeit, Design und Intelligenz konzentriert.</p>
+                <a href="#downloads" class="cta-button">Download P3 (Latest)</a>
             </div>
         </section>
 
-        <!-- ========= FEATURES SECTION ========= -->
+        <!-- ========= FEATURES SECTION mit animierten Karten ========= -->
         <section id="features" class="hidden">
-            <h2>Einzigartige Features</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Futuristisches Design</h3>
-                    <p>Eine Benutzeroberfläche, die nicht nur schön ist, sondern auch die Bedienung intuitiver macht.</p>
+                <div class="animated-card">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h3>Schönes Design</h3>
+                    <p>Eine minimalistische Oberfläche, die sich auf den Inhalt konzentriert.</p>
                 </div>
-                <div class="feature-card">
-                    <h3>Integrierte KI</h3>
-                    <p>Lass dir von unserer intelligenten KI helfen, Suchen zu optimieren und Inhalte schneller zu finden.</p>
+                <div class="animated-card">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>Intelligente KI</h3>
+                    <p>KI-gestützte Vorschläge und optimierte Suchergebnisse.</p>
                 </div>
-                <div class="feature-card">
-                    <h3>Multi-Suche</h3>
-                    <p>Durchsuche mehrere Suchmaschinen gleichzeitig und erhalte die umfassendsten Ergebnisse.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Maximale Sicherheit</h3>
-                    <p>Integrierter Schutz vor Trackern und schädlichen Websites, um deine Daten sicher zu halten.</p>
-                </div>
-                 <div class="feature-card">
-                    <h3>Lokaler Speicher</h3>
-                    <p>Deine Daten gehören dir. MK web speichert deine Chronik und Einstellungen nur lokal auf deinem Gerät.</p>
+                <div class="animated-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Sicherheit & Lokal</h3>
+                    <p>Schutz vor Trackern und lokale Datenspeicherung. Deine Daten sind dein.</p>
                 </div>
             </div>
         </section>
 
         <!-- ========= DOWNLOADS SECTION ========= -->
         <section id="downloads" class="hidden">
-            <h2>Download MK web</h2>
+            <h2>Wähle deine Version</h2>
             <div class="download-grid">
-                <div class="download-card">
+                <div class="animated-card">
                     <h3>MK WEB (P1)</h3>
-                    <p>Die erste stabile Version. Zuverlässig und schnell.</p>
-                    <a href="https://www.mediafire.com/file/05phf5dd7zr92lt/MKWEB_X_%2528P1%2529.exe/file" class="download-button" target="_blank">Download P1</a>
+                    <p>Die stabile Basisversion.</p>
+                    <a href="https://www.mediafire.com/file/05phf5dd7zr92lt/MKWEB_X_%2528P1%2529.exe/file" class="download-button" target="_blank">Download</a>
                 </div>
-                <div class="download-card">
+                <div class="animated-card">
                     <h3>MK WEB (P2)</h3>
-                    <p>Verbesserte Performance und neue Design-Elemente.</p>
-                    <a href="https://www.mediafire.com/file/jbp6sbbyc99908x/MKWEB_X_%2528P2%2529.exe/file" class="download-button" target="_blank">Download P2</a>
+                    <p>Mit verbesserter Performance.</p>
+                    <a href="https://www.mediafire.com/file/jbp6sbbyc99908x/MKWEB_X_%2528P2%2529.exe/file" class="download-button" target="_blank">Download</a>
                 </div>
-                <div class="download-card latest">
-                    <div class="badge">Neueste Version</div>
+                <div class="animated-card latest">
+                    <div class="badge">Latest</div>
                     <h3>MK WEB (P3)</h3>
-                    <p>Die aktuellste Version mit allen neuen Features und der KI-Integration.</p>
-                    <a href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="download-button" target="_blank">Download P3</a>
+                    <p>Alle Features inklusive KI.</p>
+                    <a href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="download-button" target="_blank">Download</a>
                 </div>
             </div>
         </section>
 
         <!-- ========= TUTORIAL SECTION ========= -->
         <section id="tutorial" class="hidden">
-            <h2>Als Standardbrowser festlegen (Windows)</h2>
+            <h2>Als Standardbrowser festlegen</h2>
             <ol class="tutorial-list">
-                <li>Öffne MK web und gehe im Menü auf <strong>"Extras"</strong>.</li>
-                <li>Klicke auf den Punkt <strong>"Als Standardbrowser registrieren"</strong>.</li>
-                <li>Die Windows-Einstellungen öffnen sich. Klicke auf <strong>"Apps"</strong> und dann auf <strong>"Standard-Apps"</strong>.</li>
-                <li>Gib in die Suchleiste (unter "Standards für Anwendungen festlegen") <strong>"MK web"</strong> ein und wähle es aus.</li>
-                <li>Klicke ganz oben auf den Button <strong>"Als Standard festlegen"</strong>. Fertig!</li>
+                <li>Öffne im Browser das Menü <strong>"Extras"</strong>.</li>
+                <li>Klicke auf <strong>"Als Standardbrowser registrieren"</strong>.</li>
+                <li>In den Windows-Einstellungen: <strong>Apps → Standard-Apps</strong>.</li>
+                <li>Suche nach <strong>"MK web"</strong>, wähle es aus und klicke auf <strong>"Als Standard festlegen"</strong>.</li>
             </ol>
         </section>
-
     </main>
 
     <footer>
-        <p>© 2024 MK web. Alle Rechte vorbehalten.</p>
+        <p>© 2024 MK web. Built for the future.</p>
     </footer>
 
     <script src="script.js"></script>
