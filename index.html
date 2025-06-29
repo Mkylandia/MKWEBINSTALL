@@ -3,77 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK web - Experience Browsing Anew</title>
+    <title>MK web - The Next Evolution</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-    <!-- Icon-Bibliothek für minimalistische Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
+
+    <!-- 3D Partikel Hintergrund -->
+    <canvas id="particle-canvas"></canvas>
 
     <header>
         <div class="logo">MK <span>web</span></div>
     </header>
 
     <main>
-        <!-- ========= HERO SECTION mit interaktiver Maus-Animation ========= -->
         <section id="hero">
             <div class="hero-content">
-                <h1 class="animated-gradient">Das Web. Neu Erfunden.</h1>
-                <p class="subtitle" id="hero-spotlight">Ein Browser, der sich auf Geschwindigkeit, Design und Intelligenz konzentriert.</p>
-                <a href="#downloads" class="cta-button">Download P3 (Latest)</a>
+                <h1 class="animated-text">Die Nächste Evolution des Browsens</h1>
+                <p class="subtitle animated-text" style="--delay: 0.2s;">Intuitiv. Intelligent. Unmittelbar.</p>
+                <a href="#downloads" class="cta-button animated-text" style="--delay: 0.4s;">
+                    <i class="fa-solid fa-rocket"></i> Launch P3
+                </a>
             </div>
         </section>
 
-        <!-- ========= FEATURES SECTION mit animierten Karten ========= -->
         <section id="features" class="hidden">
             <div class="features-grid">
-                <div class="animated-card">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <h3>Schönes Design</h3>
-                    <p>Eine minimalistische Oberfläche, die sich auf den Inhalt konzentriert.</p>
+                <!-- Die Karten bleiben strukturell gleich, erhalten aber neues CSS -->
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Fluid Interface</h3>
+                        <p>Ein Design, das mit dir interagiert und sich auf das Wesentliche konzentriert.</p>
+                    </div>
                 </div>
-                <div class="animated-card">
-                    <i class="fa-solid fa-brain"></i>
-                    <h3>Intelligente KI</h3>
-                    <p>KI-gestützte Vorschläge und optimierte Suchergebnisse.</p>
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fa-solid fa-brain"></i>
+                        <h3>Predictive AI</h3>
+                        <p>Die KI lernt deine Gewohnheiten und beschleunigt deine täglichen Aufgaben.</p>
+                    </div>
                 </div>
-                <div class="animated-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Sicherheit & Lokal</h3>
-                    <p>Schutz vor Trackern und lokale Datenspeicherung. Deine Daten sind dein.</p>
+                <div class="card">
+                    <div class="card-content">
+                        <i class="fa-solid fa-lock"></i>
+                        <h3>Local-First Security</h3>
+                        <p>Deine Daten verlassen niemals dein Gerät. Absolute Privatsphäre als Standard.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========= DOWNLOADS SECTION ========= -->
+        <!-- Der NEUE Download Bereich -->
         <section id="downloads" class="hidden">
-            <h2>Wähle deine Version</h2>
-            <div class="download-grid">
-                <div class="animated-card">
-                    <h3>MK WEB (P1)</h3>
-                    <p>Die stabile Basisversion.</p>
-                    <a href="https://www.mediafire.com/file/05phf5dd7zr92lt/MKWEB_X_%2528P1%2529.exe/file" class="download-button" target="_blank">Download</a>
+            <h2>System Deployment</h2>
+            <div class="download-terminal">
+                <div class="version-selector">
+                    <button class="version-btn" data-version="p1">MK WEB (P1)</button>
+                    <button class="version-btn" data-version="p2">MK WEB (P2)</button>
+                    <button class="version-btn active" data-version="p3">MK WEB (P3)</button>
                 </div>
-                <div class="animated-card">
-                    <h3>MK WEB (P2)</h3>
-                    <p>Mit verbesserter Performance.</p>
-                    <a href="https://www.mediafire.com/file/jbp6sbbyc99908x/MKWEB_X_%2528P2%2529.exe/file" class="download-button" target="_blank">Download</a>
-                </div>
-                <div class="animated-card latest">
-                    <div class="badge">Latest</div>
-                    <h3>MK WEB (P3)</h3>
-                    <p>Alle Features inklusive KI.</p>
-                    <a href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="download-button" target="_blank">Download</a>
+                <div class="download-display">
+                    <div id="display-content">
+                        <h3 id="version-title">MK WEB (P3)</h3>
+                        <span id="version-badge" class="badge">LATEST & RECOMMENDED</span>
+                        <p id="version-description">Die ultimative Version mit Predictive AI, neuem Fluid Interface und maximaler Performance. Die Zukunft des Webs, heute.</p>
+                        <a id="download-link" href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="main-download-button" target="_blank">
+                            <i class="fa-solid fa-download"></i> Download & Deploy
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- ========= TUTORIAL SECTION ========= -->
+        
+        <!-- Tutorial-Sektion behalten wir für die Info -->
         <section id="tutorial" class="hidden">
-            <h2>Als Standardbrowser festlegen</h2>
+             <h2>Als Standardbrowser festlegen</h2>
             <ol class="tutorial-list">
                 <li>Öffne im Browser das Menü <strong>"Extras"</strong>.</li>
                 <li>Klicke auf <strong>"Als Standardbrowser registrieren"</strong>.</li>
@@ -84,7 +92,7 @@
     </main>
 
     <footer>
-        <p>© 2024 MK web. Built for the future.</p>
+        <p>© 2024 MK web. Engineering the Future.</p>
     </footer>
 
     <script src="script.js"></script>
