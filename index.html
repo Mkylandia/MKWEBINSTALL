@@ -1,100 +1,53 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MK web - The Next Evolution</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>MK Web X – Der Browser der Zukunft</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Three.js für 3D-Animationen -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r142/three.min.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <header class="hero">
+    <canvas id="scene3d"></canvas>
+    <div class="hero-content">
+      <h1>MK Web X</h1>
+      <p>Der Browser der Zukunft: Schneller. Sicherer. KI-gestützt.</p>
+      <nav class="downloads">
+        <a href="https://www.mediafire.com/file/05phf5dd7zr92lt/MKWEB_X_%2528P1%2529.exe/file" class="btn">Download P1</a>
+        <a href="https://www.mediafire.com/file/jbp6sbbyc99908x/MKWEB_X_%2528P2%2529.exe/file" class="btn">Download P2</a>
+        <a href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="btn primary">Download P3 (Neueste)</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- 3D Partikel Hintergrund -->
-    <canvas id="particle-canvas"></canvas>
+  <main>
+    <section class="features">
+      <h2>Features</h2>
+      <ul>
+        <li><strong>Futuristisches Design</strong> mit anpassbaren Themes</li>
+        <li><strong>Künstliche Intelligenz</strong> für intelligente Suche & Empfehlungen</li>
+        <li><strong>Multisuche</strong> – nutze Google, Bing, DuckDuckGo gleichzeitig</li>
+        <li><strong>Sicherheit</strong> durch Sandbox-Modus und Tracking-Schutz</li>
+        <li><strong>Lokaler Datenspeicher</strong> für Offline-Notizen & Lesezeichen</li>
+      </ul>
+    </section>
 
-    <header>
-        <div class="logo">MK <span>web</span></div>
-    </header>
+    <section class="tutorial">
+      <h2>Tutorial: MK Web X als Standard-Browser einstellen</h2>
+      <ol>
+        <li>Öffne den Browser und klicke oben rechts auf <strong>Extras → MK Web X</strong>.</li>
+        <li>Wähle <strong>Als Standard-Browser registrieren</strong>.</li>
+        <li>Wechsle in Windows zu <strong>Einstellungen → Apps → Standard-Apps</strong>.</li>
+        <li>Gib in der Suchleiste <strong>MK Web</strong> ein und wähle es als Standard.</li>
+      </ol>
+    </section>
+  </main>
 
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-                <h1 class="animated-text">Die Nächste Evolution des Browsens</h1>
-                <p class="subtitle animated-text" style="--delay: 0.2s;">Intuitiv. Intelligent. Unmittelbar.</p>
-                <a href="#downloads" class="cta-button animated-text" style="--delay: 0.4s;">
-                    <i class="fa-solid fa-rocket"></i> Launch P3
-                </a>
-            </div>
-        </section>
-
-        <section id="features" class="hidden">
-            <div class="features-grid">
-                <!-- Die Karten bleiben strukturell gleich, erhalten aber neues CSS -->
-                <div class="card">
-                    <div class="card-content">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <h3>Fluid Interface</h3>
-                        <p>Ein Design, das mit dir interagiert und sich auf das Wesentliche konzentriert.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <i class="fa-solid fa-brain"></i>
-                        <h3>Predictive AI</h3>
-                        <p>Die KI lernt deine Gewohnheiten und beschleunigt deine täglichen Aufgaben.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <i class="fa-solid fa-lock"></i>
-                        <h3>Local-First Security</h3>
-                        <p>Deine Daten verlassen niemals dein Gerät. Absolute Privatsphäre als Standard.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Der NEUE Download Bereich -->
-        <section id="downloads" class="hidden">
-            <h2>System Deployment</h2>
-            <div class="download-terminal">
-                <div class="version-selector">
-                    <button class="version-btn" data-version="p1">MK WEB (P1)</button>
-                    <button class="version-btn" data-version="p2">MK WEB (P2)</button>
-                    <button class="version-btn active" data-version="p3">MK WEB (P3)</button>
-                </div>
-                <div class="download-display">
-                    <div id="display-content">
-                        <h3 id="version-title">MK WEB (P3)</h3>
-                        <span id="version-badge" class="badge">LATEST & RECOMMENDED</span>
-                        <p id="version-description">Die ultimative Version mit Predictive AI, neuem Fluid Interface und maximaler Performance. Die Zukunft des Webs, heute.</p>
-                        <a id="download-link" href="https://www.mediafire.com/file/6wfnuqr7egr3xp7/MKWEB+X+(P3).exe/file" class="main-download-button" target="_blank">
-                            <i class="fa-solid fa-download"></i> Download & Deploy
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Tutorial-Sektion behalten wir für die Info -->
-        <section id="tutorial" class="hidden">
-             <h2>Als Standardbrowser festlegen</h2>
-            <ol class="tutorial-list">
-                <li>Öffne im Browser das Menü <strong>"Extras"</strong>.</li>
-                <li>Klicke auf <strong>"Als Standardbrowser registrieren"</strong>.</li>
-                <li>In den Windows-Einstellungen: <strong>Apps → Standard-Apps</strong>.</li>
-                <li>Suche nach <strong>"MK web"</strong>, wähle es aus und klicke auf <strong>"Als Standard festlegen"</strong>.</li>
-            </ol>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2024 MK web. Engineering the Future.</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <footer>
+    <p>&copy; 2025 MK Web X. Alle Rechte vorbehalten.</p>
+  </footer>
 </body>
 </html>
