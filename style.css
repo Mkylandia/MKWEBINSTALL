@@ -1,17 +1,24 @@
-/* GRUNDLEGENDE EINSTELLUNGEN & NEUE FARBPALETTE */
+/*
+    MINIMALISTISCHES DESIGN-KONZEPT:
+    - Palette: Reines Schwarz, reines Weiß, Neon-Cyan. Maximaler Kontrast.
+    - Typografie: Definiert die Hierarchie. Keine unnötigen Boxen oder Hintergründe.
+    - Leerraum: Großzügige Abstände schaffen eine ruhige, hochwertige Atmosphäre.
+    - Linien statt Füllungen: Dünne Ränder und Linien für eine technische, saubere Ästhetik.
+    - Animation: Sanfte, physikbasierte Übergänge. Die Bewegung selbst ist die Dekoration.
+*/
+
 :root {
     --primary-color: #00ffff;
-    --primary-glow: rgba(0, 255, 255, 0.5);
-    --background-color: #05080d; /* Ein Hauch von Blau im Schwarz */
-    --card-background: rgba(15, 20, 35, 0.5);
-    --border-color: rgba(0, 255, 255, 0.2);
-    --text-color: #c0c8d8;
+    --background-color: #000000;
+    --border-color: #222222; /* Sehr dunkles Grau für subtile Ränder */
+    --text-color: #bbbbbb;
     --heading-color: #ffffff;
-    --font-body: 'Inter', sans-serif;
-    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif; /* Einheitliche, saubere Schriftart */
+    --font-heading: 'Inter', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -19,30 +26,25 @@ body {
     color: var(--text-color);
     font-family: var(--font-body);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* 3D PARTIKEL HINTERGRUND */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
+/* Der Partikel-Hintergrund wird entfernt, da er nicht minimalistisch ist. */
+#particle-canvas { display: none; }
 
 /* HEADER */
 header {
     position: fixed;
     width: 100%;
-    padding: 25px 5%;
+    padding: 30px 5%;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(5, 8, 13, 0.7), transparent);
+    /* Kein Hintergrund, der Header schwebt frei */
 }
-.logo { font-family: var(--font-heading); font-size: 1.8em; color: var(--heading-color); }
-.logo span { color: var(--primary-color); text-shadow: 0 0 10px var(--primary-color); }
+.logo { font-weight: 500; font-size: 1.8em; color: var(--heading-color); }
+.logo span { color: var(--primary-color); }
 
-/* HERO SECTION - ANIMIERTER TEXTEINTRITT */
+/* HERO SECTION */
 #hero {
     height: 90vh;
     display: flex;
@@ -54,179 +56,177 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
+/* Die Text-Fade-In Animation ist minimalistisch und effektiv */
 .animated-text {
     opacity: 0;
-    transform: translateY(30px);
-    animation: text-fade-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    transform: translateY(20px);
+    animation: text-fade-in 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     animation-delay: var(--delay, 0s);
 }
 @keyframes text-fade-in {
     to { opacity: 1; transform: translateY(0); }
 }
 
-h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: var(--font-body); font-weight: 600; color: var(--heading-color); }
-.subtitle { font-size: 1.2rem; color: var(--text-color); }
+h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 600; color: var(--heading-color); letter-spacing: -0.03em; }
+.subtitle { font-size: 1.2rem; color: var(--text-color); max-width: 600px; }
 
+/* Minimalistischer "Ghost" Button */
 .cta-button {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-top: 2rem;
-    padding: 18px 35px;
-    background: var(--primary-color);
-    color: #000;
-    font-weight: 600;
+    margin-top: 1.5rem;
+    padding: 16px 32px;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 500;
     text-decoration: none;
     border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 25px var(--primary-glow);
-    animation: pulse 2s infinite;
+    transition: all 0.3s ease;
 }
 .cta-button:hover {
+    background: var(--primary-color);
+    color: var(--background-color);
     transform: scale(1.05);
-    box-shadow: 0 0 40px var(--primary-glow);
-    animation-play-state: paused;
-}
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
 }
 
 /* SEKTIONEN & ÜBERSCHRIFTEN */
-section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; }
 h2 {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-weight: 500;
+    font-size: 2.2rem;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     color: var(--heading-color);
-    text-shadow: 0 0 15px rgba(255,255,255,0.2);
+    letter-spacing: -0.02em;
 }
 
-/* NEUES 3D-KARTEN-DESIGN MIT LEUCHTRAND */
+/* ÜBERARBEITETES KARTEN-DESIGN: ULTRA-MINIMALISTISCH */
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .card {
-    background: var(--card-background);
-    border-radius: 12px;
-    position: relative;
-    padding: 2px; /* Für den Leuchtrand */
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s ease;
-}
-.card:hover { transform: translateY(-10px); }
-
-/* Animierter Leuchtrand */
-.card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 2px;
-    background: conic-gradient(from 180deg at 50% 50%, #222, #444, #222);
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    transition: opacity 0.4s;
-    opacity: 0.5;
-}
-.card:hover::before {
-    opacity: 1;
-    background: conic-gradient(from var(--angle, 0deg) at 50% 50%, transparent, var(--primary-color), transparent);
-    animation: spin 3s linear infinite;
-}
-@property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-@keyframes spin { to { --angle: 360deg; } }
-
-.card-content {
-    background: #0b0f1a;
-    border-radius: 10px;
-    padding: 35px 30px;
-    text-align: center;
-}
-.card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
-.card h3 { font-size: 1.5rem; color: var(--heading-color); margin-bottom: 10px; }
-
-/* NEUER DOWNLOAD-BEREICH "TERMINAL" */
-.download-terminal {
-    background: var(--card-background);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
+    /* Keine komplexen Hintergründe oder Effekte, nur der Rand */
+    transition: border-color 0.4s ease, transform 0.4s ease;
+}
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+}
+.card-content {
+    /* Kein eigener Hintergrund mehr nötig, da die Karte selbst minimalistisch ist */
+    padding: 40px;
+    text-align: center;
+}
+.card i { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 25px; transition: transform 0.4s ease; }
+.card:hover i { transform: scale(1.1); }
+.card h3 { font-size: 1.4rem; font-weight: 500; color: var(--heading-color); margin-bottom: 15px; }
+
+
+/* MINIMALISTISCHER DOWNLOAD-BEREICH */
+.download-terminal {
+    /* Kein eigener Kasten, das Layout ist offen und durch Linien getrennt */
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 3rem 0;
 }
 
 .version-selector {
     display: flex;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 2rem;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 .version-btn {
     background: transparent;
     border: none;
     color: var(--text-color);
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
     position: relative;
-    transition: color 0.3s ease;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, color 0.3s ease;
 }
-.version-btn:hover { color: var(--heading-color); }
+.version-btn:hover { opacity: 1; color: var(--heading-color); }
 .version-btn.active {
     color: var(--primary-color);
-    font-weight: 600;
+    opacity: 1;
+    font-weight: 500;
 }
 .version-btn.active::after {
+    /* Dezenterer Indikator */
     content: '';
     position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
     background: var(--primary-color);
-    box-shadow: 0 0 10px var(--primary-color);
+    border-radius: 50%;
 }
 
-#display-content { animation: text-fade-in 0.5s ease; }
-#version-title { font-size: 2rem; color: var(--heading-color); margin-bottom: 0.5rem; }
+.download-display { text-align: center; }
+#version-title { font-size: 2rem; color: var(--heading-color); margin-bottom: 1rem; font-weight: 500; }
 #version-badge {
-    background: var(--primary-color);
-    color: #000;
+    /* Outline-Badge: minimalistischer und technischer */
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
     font-size: 0.8rem;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 15px; /* Pillenform */
     display: inline-block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
-#version-description { font-size: 1.1rem; line-height: 1.7; max-width: 700px; margin-bottom: 2.5rem; }
-
+#version-description { font-size: 1.1rem; line-height: 1.7; max-width: 650px; margin: 0 auto 2.5rem auto; }
 .main-download-button {
+    /* Gleicher Stil wie der Haupt-CTA-Button für Konsistenz */
     display: inline-flex;
     align-items: center;
     gap: 15px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 16px 32px;
     text-decoration: none;
-    color: #000;
+    color: var(--background-color);
     background: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
-.main-download-button:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary-glow); }
+.main-download-button:hover {
+    background: transparent;
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
 
 /* TUTORIAL & FOOTER */
-.tutorial-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
-.tutorial-list li { background: rgba(15, 20, 35, 0.8); padding: 20px; border-radius: 5px; border-left: 3px solid var(--primary-color); }
-footer { text-align: center; padding: 40px 20px; margin-top: 50px; color: #555; border-top: 1px solid #1a1a1a; }
+.tutorial-list { list-style: none; display: flex; flex-direction: column; gap: 15px; max-width: 800px; margin: 0 auto; }
+.tutorial-list li {
+    background: transparent; /* Kein Hintergrund */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color); /* Nur ein Rand */
+}
+footer { text-align: center; padding: 40px 20px; margin-top: 80px; color: #555; border-top: 1px solid var(--border-color); }
 
-/* VERBESSERTE SCROLL-ANIMATION */
-.hidden { opacity: 0; transform: translateY(50px) scale(0.95); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.show { opacity: 1; transform: translateY(0) scale(1); }
+/* SCROLL-ANIMATION: Bleibt gleich, da sie bereits hochwertig ist */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
