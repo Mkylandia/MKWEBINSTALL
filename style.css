@@ -1,194 +1,115 @@
-/*
-    KONZEPT: "KOSMISCHE SINGULARITÄT"
-    =================================
-    Ein extremes CSS-Experiment, das die Grenzen von 3D-Transformationen,
-    Perspektive und interaktiven Animationen auslotet.
-*/
-
-/* ========= 1. GRUNDEINSTELLUNGEN & KOSMISCHE PALETTE ========= */
-:root {
-    --primary-color: #00f7ff;  /* Elektrisches Cyan */
-    --secondary-color: #f000ff; /* Neon-Magenta */
-    --background-color: #000000;
-    --surface-color: rgba(10, 20, 40, 0.6);
-    --border-color: rgba(0, 247, 255, 0.3);
-    --glow-color: rgba(0, 247, 255, 0.5);
-    --text-color: #b0c4de;
-    --heading-color: #ffffff;
-    --font-main: 'Inter', sans-serif;
-    --ease-out-heavy: cubic-bezier(0.2, 1, 0.2, 1);
-
-    /* CSS-Variablen für globale 3D-Kamerasteuerung (benötigt JS zum Setzen) */
-    --rotate-x: 0deg;
-    --rotate-y: 0deg;
+/* Basis-Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
 
 body {
-    background: #000;
-    font-family: var(--font-main);
-    color: var(--text-color);
-    /* Der 3D-Raum für die gesamte Seite wird hier erstellt */
-    perspective: 2000px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0a0f1a;
+  color: #e0e7ff;
+  overflow-x: hidden;
 }
 
-/* Der Haupt-Wrapper, der auf die Kamera-Rotation reagiert */
-#viewport {
-    width: 100%;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    /* Dies ist entscheidend! Erlaubt 3D-Positionierung der Kinder */
-    transform-style: preserve-3d;
-    transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
-    transition: transform 0.6s var(--ease-out-heavy);
+/* Hero-Sektion mit 3D-Canvas */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-/* ========= 2. HERO & DIE CSS 3D-SINGULARITÄT ========= */
-#hero {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* Positioniert die Hero-Sektion im 3D-Raum */
-    transform-style: preserve-3d;
-    transform: translateZ(-200px);
+#scene3d {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
 }
 
 .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform: translateZ(200px); /* Bringt den Inhalt wieder nach vorne */
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
 }
 
-/* Die 3D-Singularität (Ikosaeder) */
-.singularity {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    margin-bottom: 5rem;
-    transform-style: preserve-3d;
-    animation: singularity-spin 30s infinite linear;
-}
-@keyframes singularity-spin {
-    from { transform: rotateX(0) rotateY(0) rotateZ(0); }
-    to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+.hero h1 {
+  font-size: 4rem;
+  text-shadow: 0 0 20px #3b82f6;
 }
 
-.singularity .face {
-    position: absolute;
-    left: calc(50% - 50px); top: calc(50% - 50px);
-    width: 0; height: 0;
-    /* Erzeugt Dreiecke mit Rändern */
-    border-style: solid;
-    border-color: var(--primary-color) transparent transparent transparent;
-    border-width: 86.6px 50px 0 50px;
-    opacity: 0.3;
-    filter: drop-shadow(0 0 10px var(--primary-color));
+.hero p {
+  font-size: 1.5rem;
+  margin: 1rem 0 2rem;
 }
 
-/* Positionierung der 20 Flächen (komplexe 3D-Transformationen) */
-.singularity .face:nth-child(1)  { transform: rotateY(0deg)    rotateX(31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(2)  { transform: rotateY(72deg)   rotateX(31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(3)  { transform: rotateY(144deg)  rotateX(31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(4)  { transform: rotateY(216deg)  rotateX(31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(5)  { transform: rotateY(288deg)  rotateX(31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(6)  { transform: rotateY(36deg)   rotateX(-31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(7)  { transform: rotateY(108deg)  rotateX(-31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(8)  { transform: rotateY(180deg)  rotateX(-31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(9)  { transform: rotateY(252deg)  rotateX(-31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(10) { transform: rotateY(324deg)  rotateX(-31.7deg) translateZ(80.9px); }
-.singularity .face:nth-child(11) { transform: rotateY(36deg)   rotateX(180deg) translateZ(80.9px) rotateX(31.7deg); }
-.singularity .face:nth-child(12) { transform: rotateY(108deg)  rotateX(180deg) translateZ(80.9px) rotateX(31.7deg); }
-.singularity .face:nth-child(13) { transform: rotateY(180deg)  rotateX(180deg) translateZ(80.9px) rotateX(31.7deg); }
-.singularity .face:nth-child(14) { transform: rotateY(252deg)  rotateX(180deg) translateZ(80.9px) rotateX(31.7deg); }
-.singularity .face:nth-child(15) { transform: rotateY(324deg)  rotateX(180deg) translateZ(80.9px) rotateX(31.7deg); }
-.singularity .face:nth-child(16) { transform: rotateY(0deg)    rotateX(180deg) translateZ(80.9px) rotateX(-31.7deg); }
-.singularity .face:nth-child(17) { transform: rotateY(72deg)   rotateX(180deg) translateZ(80.9px) rotateX(-31.7deg); }
-.singularity .face:nth-child(18) { transform: rotateY(144deg)  rotateX(180deg) translateZ(80.9px) rotateX(-31.7deg); }
-.singularity .face:nth-child(19) { transform: rotateY(216deg)  rotateX(180deg) translateZ(80.9px) rotateX(-31.7deg); }
-.singularity .face:nth-child(20) { transform: rotateY(288deg)  rotateX(180deg) translateZ(80.9px) rotateX(-31.7deg); }
-
-
-/* ========= 3. HOLOGRAPHISCHE 3D-PANELS (Karten) ========= */
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-
-.holographic-card {
-    position: relative;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(10, 20, 40, 0.5), rgba(10, 20, 40, 0.2));
-    backdrop-filter: blur(15px);
-    transform-style: preserve-3d;
-    transition: transform 0.5s var(--ease-out-heavy), box-shadow 0.5s ease;
-    will-change: transform;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-.holographic-card:hover {
-    transform: translateZ(50px) scale(1.05);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem;
+  border: 2px solid #3b82f6;
+  border-radius: 2rem;
+  text-decoration: none;
+  color: #3b82f6;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Leuchtender Rahmen hinter dem Panel */
-.holographic-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    border: 2px solid var(--border-color);
-    transform: translateZ(-10px);
-    filter: drop-shadow(0 0 15px var(--glow-color));
-    transition: all 0.5s ease;
-}
-.holographic-card:hover::before {
-    border-color: var(--primary-color);
+.btn:hover {
+  background: rgba(59, 130, 246, 0.2);
 }
 
-/* Inhalt, der IM Panel schwebt */
-.card-content {
-    padding: 40px;
-    text-align: center;
-    transform: translateZ(40px); /* Das ist der Parallax-Effekt! */
-}
-.card-content i { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 25px; }
-.card-content h3 { font-size: 1.6rem; font-weight: 600; color: var(--heading-color); margin-bottom: 15px; }
-
-
-/* ========= 4. "DOCKING BAY" DOWNLOAD-MODUL ========= */
-.download-terminal {
-    background: linear-gradient(rgba(10, 20, 40, 0.3), rgba(10, 20, 40, 0.1));
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 3rem;
-    backdrop-filter: blur(15px);
-    transform-style: preserve-3d;
+.primary {
+  background: #3b82f6;
+  color: #fff;
 }
 
-#version-title { text-shadow: 0 0 15px var(--glow-color); }
-.main-download-button {
-    background: var(--primary-color);
-    color: #000;
-    /* ... restliches Styling kann von vorherigen Versionen übernommen werden */
-}
-.main-download-button:hover {
-    box-shadow: 0 0 25px var(--primary-color);
-    transform: scale(1.05);
+/* Features */
+.features {
+  padding: 4rem 2rem;
+  background: #111827;
+  text-align: center;
 }
 
-
-/* ========= 5. "WARP-SPEED" SCROLL-ANIMATIONEN ========= */
-.hidden {
-    opacity: 0;
-    /* STARTET WEIT HINTEN IM 3D-RAUM! */
-    transform: translateZ(-800px);
-    transition: opacity 1s ease-out, transform 1.2s var(--ease-out-heavy);
-    transition-delay: calc(var(--i, 0) * 150ms);
+.features h2 {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
 }
-.show {
-    opacity: 1;
-    /* FLIEGT NACH VORNE IN POSITION */
-    transform: translateZ(0);
+
+.features ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.features li {
+  background: #1f2937;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Tutorial */
+.tutorial {
+  padding: 4rem 2rem;
+}
+
+.tutorial h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.tutorial ol {
+  list-style: decimal inside;
+  line-height: 1.6;
+}
+
+/* Footer */
+footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  background: #0f172a;
 }
