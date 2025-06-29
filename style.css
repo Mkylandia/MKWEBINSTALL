@@ -1,20 +1,37 @@
 /*
-    MINIMALISTISCHES DESIGN-KONZEPT:
-    - Palette: Reines Schwarz, reines Weiß, Neon-Cyan. Maximaler Kontrast.
-    - Typografie: Definiert die Hierarchie. Keine unnötigen Boxen oder Hintergründe.
-    - Leerraum: Großzügige Abstände schaffen eine ruhige, hochwertige Atmosphäre.
-    - Linien statt Füllungen: Dünne Ränder und Linien für eine technische, saubere Ästhetik.
-    - Animation: Sanfte, physikbasierte Übergänge. Die Bewegung selbst ist die Dekoration.
+    DESIGN-PRINZIP: "LIVING GLASS & FLOWING LIGHT"
+    =============================================
+    Eine Demonstration moderner CSS-Techniken für eine immersive,
+    atmosphärische und hochgradig animierte Benutzeroberfläche.
 */
 
+/* ========= 1. GRUNDEINSTELLUNGEN & FARBPALETTE ========= */
 :root {
-    --primary-color: #00ffff;
-    --background-color: #000000;
-    --border-color: #222222; /* Sehr dunkles Grau für subtile Ränder */
-    --text-color: #bbbbbb;
-    --heading-color: #ffffff;
-    --font-body: 'Inter', sans-serif; /* Einheitliche, saubere Schriftart */
-    --font-heading: 'Inter', sans-serif;
+    /* Farbpalette: Tiefes Mitternachtsblau mit lebendigen Akzenten */
+    --primary-color: #9f55ff; /* Lebhaftes Violett */
+    --secondary-color: #00f0ff; /* Helles Neon-Cyan */
+    --background-color: #020412; /* Sehr dunkles Mitternachtsblau */
+    --surface-color: rgba(15, 18, 42, 0.5); /* Transluzente Oberfläche */
+    --border-color: rgba(159, 85, 255, 0.2);
+    --text-color: #a0a8c2;
+    --heading-color: #edf2f7;
+
+    /* Animation & Typografie */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Houdini-Eigenschaft für flüssige Gradienten-Animationen */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --glow-opacity {
+  syntax: '<number>';
+  initial-value: 0;
+  inherits: false;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,207 +41,241 @@ html { scroll-behavior: smooth; }
 body {
     background-color: var(--background-color);
     color: var(--text-color);
-    font-family: var(--font-body);
+    font-family: var(--font-sans);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* Animierter, atmender Hintergrund */
+    background-image: radial-gradient(circle at 10% 10%, rgba(159, 85, 255, 0.1) 0%, transparent 30%),
+                      radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
+    animation: background-breathe 15s infinite ease-in-out;
 }
 
-/* Der Partikel-Hintergrund wird entfernt, da er nicht minimalistisch ist. */
-#particle-canvas { display: none; }
+@keyframes background-breathe {
+    0%, 100% { background-position: 0% 0%, 0% 0%; }
+    50% { background-position: 20px 20px, -20px -20px; }
+}
 
-/* HEADER */
+/* Thematischer Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--background-color); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
+/* ========= 2. HEADER & LAYOUT ========= */
 header {
     position: fixed;
     width: 100%;
     padding: 30px 5%;
-    z-index: 100;
-    /* Kein Hintergrund, der Header schwebt frei */
+    z-index: 1000;
 }
-.logo { font-weight: 500; font-size: 1.8em; color: var(--heading-color); }
+.logo { font-weight: 600; font-size: 1.6em; color: var(--heading-color); }
 .logo span { color: var(--primary-color); }
 
-/* HERO SECTION */
+main { position: relative; z-index: 1; }
+section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; }
+
+h2 {
+    font-weight: 600;
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 80px;
+    color: var(--heading-color);
+    letter-spacing: -0.03em;
+}
+
+/* ========= 3. CINEASTISCHE HERO-SEKTION ========= */
 #hero {
-    height: 90vh;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
 
-/* Die Text-Fade-In Animation ist minimalistisch und effektiv */
+/* Text-Reveal-Animation */
 .animated-text {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    line-height: 1.2;
+}
+.animated-text > span {
+    display: inline-block;
     opacity: 0;
-    transform: translateY(20px);
-    animation: text-fade-in 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    transform: translateY(100%);
+    animation: text-reveal 1.2s var(--ease-out-expo) forwards;
     animation-delay: var(--delay, 0s);
 }
-@keyframes text-fade-in {
+@keyframes text-reveal {
     to { opacity: 1; transform: translateY(0); }
 }
+h1.animated-text > span { font-size: clamp(2.8rem, 9vw, 5.5rem); font-weight: 700; letter-spacing: -0.04em; color: var(--heading-color); }
+p.subtitle { font-size: 1.25rem; max-width: 600px; color: var(--text-color); margin-top: 1.5rem; }
 
-h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 600; color: var(--heading-color); letter-spacing: -0.03em; }
-.subtitle { font-size: 1.2rem; color: var(--text-color); max-width: 600px; }
-
-/* Minimalistischer "Ghost" Button */
 .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 1.5rem;
-    padding: 16px 32px;
-    background: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 500;
+    gap: 12px;
+    margin-top: 2.5rem;
+    padding: 18px 36px;
+    background-image: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background-size: 200% auto;
+    color: #000;
+    font-weight: 600;
     text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.4s var(--ease-out-quart);
+    box-shadow: 0 10px 30px rgba(159, 85, 255, 0.3);
 }
 .cta-button:hover {
-    background: var(--primary-color);
-    color: var(--background-color);
-    transform: scale(1.05);
+    transform: translateY(-5px) scale(1.05);
+    background-position: right center;
+    box-shadow: 0 15px 40px rgba(159, 85, 255, 0.4);
 }
+.cta-button i { transition: transform 0.3s ease; }
+.cta-button:hover i { transform: rotate(15deg); }
 
-/* SEKTIONEN & ÜBERSCHRIFTEN */
-section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; }
-h2 {
-    font-weight: 500;
-    font-size: 2.2rem;
-    text-align: center;
-    margin-bottom: 70px;
-    color: var(--heading-color);
-    letter-spacing: -0.02em;
+/* ========= 4. "AURORA" INTERAKTIVE KARTEN ========= */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
-
-/* ÜBERARBEITETES KARTEN-DESIGN: ULTRA-MINIMALISTISCH */
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
 .card {
+    --glow-opacity: 0; /* Initialzustand */
+    background: var(--surface-color);
+    border-radius: 16px;
+    position: relative;
+    padding: 2px;
+    backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    /* Keine komplexen Hintergründe oder Effekte, nur der Rand */
-    transition: border-color 0.4s ease, transform 0.4s ease;
+    transition: transform 0.5s var(--ease-out-quart), border-color 0.5s ease;
+    will-change: transform;
 }
 .card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary-color);
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(159, 85, 255, 0.5);
+    --glow-opacity: 1;
 }
+
+/* Der magische, animierte Leuchtrand */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from var(--angle), var(--secondary-color), var(--primary-color), var(--secondary-color));
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: var(--glow-opacity);
+    transition: opacity 0.5s ease;
+    animation: spin 4s linear infinite;
+}
+@keyframes spin { to { --angle: 360deg; } }
+
 .card-content {
-    /* Kein eigener Hintergrund mehr nötig, da die Karte selbst minimalistisch ist */
+    background: var(--background-color);
+    border-radius: 14px;
     padding: 40px;
     text-align: center;
+    height: 100%;
 }
-.card i { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 25px; transition: transform 0.4s ease; }
-.card:hover i { transform: scale(1.1); }
-.card h3 { font-size: 1.4rem; font-weight: 500; color: var(--heading-color); margin-bottom: 15px; }
+.card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 25px; text-shadow: 0 0 15px rgba(159, 85, 255, 0.5); }
+.card h3 { font-size: 1.5rem; font-weight: 600; color: var(--heading-color); margin-bottom: 15px; }
 
 
-/* MINIMALISTISCHER DOWNLOAD-BEREICH */
+/* ========= 5. HIGH-TECH DOWNLOAD-TERMINAL ========= */
 .download-terminal {
-    /* Kein eigener Kasten, das Layout ist offen und durch Linien getrennt */
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    padding: 3rem 0;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
 }
 
 .version-selector {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2.5rem;
+    position: relative;
 }
 .version-btn {
     background: transparent;
     border: none;
     color: var(--text-color);
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
     cursor: pointer;
-    position: relative;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, color 0.3s ease;
+    transition: color 0.3s ease;
 }
-.version-btn:hover { opacity: 1; color: var(--heading-color); }
-.version-btn.active {
-    color: var(--primary-color);
-    opacity: 1;
-    font-weight: 500;
-}
+.version-btn:hover { color: var(--heading-color); }
+.version-btn.active { color: var(--primary-color); font-weight: 600; }
+
+/* Gleitender Indikator unter den Tabs (erfordert JS zum Positionieren) */
+/* Alternativ: fester Indikator */
 .version-btn.active::after {
-    /* Dezenterer Indikator */
     content: '';
     position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
+    bottom: -1px;
+    left: 0; /* JS müsste hier 'left' und 'width' anpassen */
+    width: 100%; /* Fallback */
+    height: 2px;
     background: var(--primary-color);
-    border-radius: 50%;
+    box-shadow: 0 0 15px var(--primary-color);
+    transition: all 0.4s var(--ease-out-expo);
 }
 
-.download-display { text-align: center; }
-#version-title { font-size: 2rem; color: var(--heading-color); margin-bottom: 1rem; font-weight: 500; }
+#display-content { animation: content-fade-in 0.6s var(--ease-out-expo); }
+@keyframes content-fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#version-title { font-size: 2rem; color: var(--heading-color); margin-bottom: 1rem; }
 #version-badge {
-    /* Outline-Badge: minimalistischer und technischer */
-    background: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: #000;
     font-size: 0.8rem;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 15px; /* Pillenform */
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 6px;
     display: inline-block;
     margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
-#version-description { font-size: 1.1rem; line-height: 1.7; max-width: 650px; margin: 0 auto 2.5rem auto; }
-.main-download-button {
-    /* Gleicher Stil wie der Haupt-CTA-Button für Konsistenz */
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 16px 32px;
-    text-decoration: none;
-    color: var(--background-color);
-    background: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-.main-download-button:hover {
-    background: transparent;
-    color: var(--primary-color);
-    transform: scale(1.05);
-}
+#version-description { font-size: 1.1rem; line-height: 1.7; max-width: 700px; margin-bottom: 3rem; }
 
-/* TUTORIAL & FOOTER */
-.tutorial-list { list-style: none; display: flex; flex-direction: column; gap: 15px; max-width: 800px; margin: 0 auto; }
+.main-download-button { /* Gleicher Stil wie CTA für Konsistenz */
+    display: inline-flex; align-items: center; gap: 12px; font-size: 1.1rem;
+    padding: 16px 32px; background: var(--primary-color); color: #000; font-weight: 600;
+    text-decoration: none; border-radius: 10px; transition: all 0.3s ease;
+}
+.main-download-button:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(159, 85, 255, 0.4); }
+
+/* ========= 6. ALLGEMEINE VERBESSERUNGEN & SCROLL-ANIMATION ========= */
+.tutorial-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; max-width: 800px; margin: 0 auto; }
 .tutorial-list li {
-    background: transparent; /* Kein Hintergrund */
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color); /* Nur ein Rand */
+    border-radius: 12px;
 }
-footer { text-align: center; padding: 40px 20px; margin-top: 80px; color: #555; border-top: 1px solid var(--border-color); }
+footer { text-align: center; padding: 40px 20px; margin-top: 80px; color: #555; border-top: 1px solid #1a1a1a; }
 
-/* SCROLL-ANIMATION: Bleibt gleich, da sie bereits hochwertig ist */
 .hidden {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translateY(50px);
+    transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+    transition-delay: calc(var(--i, 0) * 100ms);
 }
 .show {
     opacity: 1;
