@@ -1,12 +1,18 @@
 /* GRUNDLEGENDE EINSTELLUNGEN & FARBPALETTE */
 :root {
-    --primary-color: #00ffff; /* Neon-Cyan */
-    --background-color: #000000; /* Reines Schwarz für maximalen Kontrast */
-    --card-background: #0d0d0d; /* Sehr dunkles Grau */
+    --primary-color: #00ffff;
+    --background-color: #000000;
+    --card-background: #0d0d0d;
     --text-color: #cccccc;
     --heading-color: #ffffff;
     --heading-font: 'Orbitron', sans-serif;
     --body-font: 'Poppins', sans-serif;
+
+    /* CSS-Variablen für interaktive 3D-Effekte (von JS gesteuert) */
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --card-rotateX: 0deg;
+    --card-rotateY: 0deg;
 }
 
 * {
@@ -39,6 +45,7 @@ header {
     font-size: 1.8em;
     font-weight: 500;
     color: var(--heading-color);
+    transform: translateZ(50px); /* Kleiner 3D-Effekt */
 }
 
 .logo span {
@@ -46,7 +53,7 @@ header {
     text-shadow: 0 0 10px var(--primary-color);
 }
 
-/* ========= HERO SECTION ANIMATIONEN ========= */
+/* ========= 3D HERO SECTION ========= */
 #hero {
     height: 90vh;
     display: flex;
@@ -54,51 +61,41 @@ header {
     align-items: center;
     text-align: center;
     padding: 0 20px;
+    /* Erstellt den 3D-Raum für die Kinder-Elemente */
+    perspective: 1000px;
 }
 
 .hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    /* Wichtig, damit die Kinder im 3D-Raum bleiben */
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    /* Die Rotation wird durch JS basierend auf der Mausposition gesteuert */
+    transform: rotateX(calc(var(--card-rotateX) / -2)) rotateY(calc(var(--card-rotateY) / 2));
 }
 
-/* Animierter Farbverlauf in der Überschrift */
-.animated-gradient {
+h1.animated-gradient {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(2.5rem, 10vw, 5rem); /* Responsive Schriftgröße */
+    font-size: clamp(2.5rem, 10vw, 5rem);
     font-weight: 600;
     color: var(--heading-color);
-    background: linear-gradient(90deg, #eee, #fff, #eee);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 8s linear infinite;
+    /* 3D-Texteffekt durch gestapelte Schatten */
+    text-shadow: 
+        0px 1px 1px rgba(0,0,0,0.5),
+        0px 2px 2px rgba(0,0,0,0.4),
+        0px 3px 3px rgba(0,0,0,0.3),
+        0 0 15px var(--primary-color),
+        0 0 25px var(--primary-color);
+    transform: translateZ(40px); /* Hebt den Titel im 3D-Raum an */
+    transition: transform 0.5s ease;
 }
 
-@keyframes shine {
-    to { background-position: -200% center; }
-}
-
-/* Interaktiver Maus-Spotlight Effekt */
-#hero-spotlight {
+p.subtitle {
     font-size: 1.2rem;
-    max-width: 600px;
-    position: relative;
     color: #999;
-}
-#hero-spotlight::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), white 0%, transparent 20%);
-    opacity: 0.8;
-    transition: background 0.1s linear;
+    transform: translateZ(20px); /* Hebt auch den Untertitel leicht an */
 }
 
+/* ========= 3D CALL-TO-ACTION BUTTON ========= */
 .cta-button {
     display: inline-block;
     margin-top: 20px;
@@ -110,12 +107,21 @@ header {
     text-decoration: none;
     border-radius: 5px;
     font-size: 1.1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    transform-style: preserve-3d;
+    transform: translateZ(50px); /* Lässt den Button "schweben" */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    box-shadow: 0px 10px 20px rgba(0, 255, 255, 0.2);
 }
 
 .cta-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+    transform: translateZ(60px) scale(1.05); /* Kommt beim Hovern noch näher */
+    box-shadow: 0px 15px 30px rgba(0, 255, 255, 0.3);
+}
+
+.cta-button:active {
+    transform: translateZ(45px) scale(1.0); /* "Drückt" sich beim Klicken nach unten */
+    box-shadow: 0px 5px 15px rgba(0, 255, 255, 0.2);
 }
 
 /* ========= ALLGEMEINES SECTION STYLING ========= */
@@ -132,12 +138,15 @@ h2 {
     text-align: center;
     margin-bottom: 60px;
     color: var(--heading-color);
+    transform: translateZ(20px);
+    transform-style: preserve-3d;
 }
 
-/* ========= ANIMIERTE KARTEN ========= */
+/* ========= 3D INTERAKTIVE KARTEN ========= */
 .features-grid, .download-grid {
     display: grid;
-    gap: 25px;
+    gap: 35px;
+    perspective: 1200px; /* Jedes Grid ist ein eigener 3D-Raum */
 }
 
 .features-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -146,18 +155,47 @@ h2 {
 .animated-card {
     background: var(--card-background);
     padding: 35px 30px;
-    border-radius: 10px;
+    border-radius: 12px;
     position: relative;
-    overflow: hidden; /* Wichtig für den Hover-Effekt */
-    transition: transform 0.3s ease;
-    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+    will-change: transform; /* Performance-Optimierung */
+    box-shadow: 0px 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Die Karte reagiert auf die --card-rotate Variablen */
+.animated-card:hover {
+    transform: rotateX(var(--card-rotateX)) rotateY(var(--card-rotateY)) translateZ(50px) scale(1.05);
+    box-shadow: 0px 30px 60px rgba(0,0,0,0.6);
+}
+
+/* Blendeffekt (Glare), der der Maus folgt */
+.animated-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.15), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 2;
+}
+.animated-card:hover::before {
+    opacity: 1;
+}
+
+/* Hebt den Inhalt der Karte im 3D-Raum an, erzeugt Parallax-Effekt beim Kippen */
+.animated-card > * {
+    position: relative;
+    transform: translateZ(40px);
+    z-index: 3;
 }
 
 .animated-card i {
     font-size: 2.5rem;
     color: var(--primary-color);
-    margin-bottom: 20px;
-    text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    transform: translateZ(20px); /* Icons schweben noch weiter vorne */
 }
 
 .animated-card h3 {
@@ -166,83 +204,18 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* Die magische Hover-Animation */
-.animated-card::before {
-    content: "";
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: conic-gradient(from var(--angle), transparent 0%, var(--primary-color) 10%, transparent 20%);
-    animation: rotate 6s linear infinite;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.animated-card:hover::before {
-    opacity: 1;
-}
-
-.animated-card::after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    background: var(--card-background);
-    border-radius: 8px;
-}
-
-/* Inhalt der Karte muss über den Pseudo-Elementen liegen */
-.animated-card > * {
-    position: relative;
-    z-index: 1;
-}
-
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes rotate {
-    to { --angle: 360deg; }
-}
-
-.download-card.latest {
-    /* Spezielle Hervorhebung */
-}
-
-.badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: var(--primary-color);
-    color: var(--background-color);
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
 .download-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 25px;
-    background: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    transform: translateZ(20px); /* Buttons auf den Karten sind auch 3D */
+    transition: all 0.2s ease;
 }
 .download-button:hover {
     background: var(--primary-color);
     color: var(--background-color);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    transform: translateZ(20px) scale(1.1); /* Beim Hovern auf den Button selbst */
 }
 
-/* ========= TUTORIAL & FOOTER ========= */
+/* ========= TUTORIAL MIT 3D-EFFEKT ========= */
 .tutorial-list {
     list-style-type: none;
     max-width: 800px;
@@ -250,14 +223,22 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    perspective: 800px;
 }
 .tutorial-list li {
     background: var(--card-background);
     padding: 20px;
     border-radius: 5px;
     border-left: 3px solid var(--primary-color);
+    transition: transform 0.3s ease-out;
+}
+.tutorial-list li:hover {
+    transform: rotateX(8deg) translateZ(15px) scale(1.02);
+    border-color: #fff;
 }
 
+
+/* ========= FOOTER ========= */
 footer {
     text-align: center;
     padding: 40px 20px;
@@ -266,20 +247,14 @@ footer {
     border-top: 1px solid #1a1a1a;
 }
 
-/* ========= SCROLL-ANIMATIONEN ========= */
+/* ========= SCROLL-ANIMATIONEN (wie zuvor, aber angepasst) ========= */
 .hidden {
     opacity: 0;
-    filter: blur(5px);
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out;
+    transform: translateY(50px); /* Startet weiter unten */
+    transition: opacity 0.6s ease-out, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .show {
     opacity: 1;
-    filter: blur(0);
     transform: translateY(0);
-}
-/* Versetzte Animation für Karten in einem Grid */
-.animated-card {
-    transition-delay: calc(0.1s * var(--i));
 }
