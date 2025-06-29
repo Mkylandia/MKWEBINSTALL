@@ -1,9 +1,10 @@
 /* GRUNDLEGENDE EINSTELLUNGEN & FARBPALETTE */
 :root {
     --primary-color: #00ffff; /* Neon-Cyan */
-    --background-color: #0a0a1a; /* Sehr dunkles Blau */
-    --card-background: rgba(20, 20, 40, 0.6);
-    --text-color: #e0e0e0;
+    --background-color: #000000; /* Reines Schwarz für maximalen Kontrast */
+    --card-background: #0d0d0d; /* Sehr dunkles Grau */
+    --text-color: #cccccc;
+    --heading-color: #ffffff;
     --heading-font: 'Orbitron', sans-serif;
     --body-font: 'Poppins', sans-serif;
 }
@@ -22,7 +23,6 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: var(--body-font);
-    background-image: linear-gradient(rgba(10, 10, 26, 0.95), rgba(10, 10, 26, 0.95)), url('https://www.transparenttextures.com/patterns/cubes.png');
     overflow-x: hidden;
 }
 
@@ -30,27 +30,25 @@ body {
 header {
     position: fixed;
     width: 100%;
-    padding: 20px 50px;
-    background: rgba(10, 10, 26, 0.5);
-    backdrop-filter: blur(10px);
+    padding: 25px 5%;
     z-index: 100;
 }
 
 .logo {
     font-family: var(--heading-font);
-    font-size: 2em;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 0 10px var(--primary-color);
+    font-size: 1.8em;
+    font-weight: 500;
+    color: var(--heading-color);
 }
 
 .logo span {
     color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
 }
 
-/* HERO SECTION MIT 3D WÜRFEL */
+/* ========= HERO SECTION ANIMATIONEN ========= */
 #hero {
-    height: 100vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,224 +57,229 @@ header {
 }
 
 .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Animierter Farbverlauf in der Überschrift */
+.animated-gradient {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 5rem); /* Responsive Schriftgröße */
+    font-weight: 600;
+    color: var(--heading-color);
+    background: linear-gradient(90deg, #eee, #fff, #eee);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 8s linear infinite;
+}
+
+@keyframes shine {
+    to { background-position: -200% center; }
+}
+
+/* Interaktiver Maus-Spotlight Effekt */
+#hero-spotlight {
+    font-size: 1.2rem;
+    max-width: 600px;
     position: relative;
-    z-index: 2;
+    color: #999;
 }
-
-h1 {
-    font-family: var(--heading-font);
-    font-size: 4rem;
-    color: white;
-    text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 30px;
+#hero-spotlight::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), white 0%, transparent 20%);
+    opacity: 0.8;
+    transition: background 0.1s linear;
 }
 
 .cta-button {
     display: inline-block;
+    margin-top: 20px;
     padding: 15px 30px;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: var(--background-color);
-    font-family: var(--heading-font);
+    font-family: var(--body-font);
+    font-weight: 600;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cta-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
 }
 
-/* 3D Würfel Animation */
-.cube-container {
-    perspective: 1000px;
-    margin-bottom: 40px;
-}
-
-.cube {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    transform-style: preserve-3d;
-    animation: rotateCube 20s infinite linear;
-    margin: 0 auto;
-}
-
-.face {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 2px solid var(--primary-color);
-    background: rgba(0, 255, 255, 0.1);
-    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.3);
-    font-family: var(--heading-font);
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--primary-color);
-}
-
-.face.front  { transform: rotateY(0deg) translateZ(50px); }
-.face.back   { transform: rotateY(180deg) translateZ(50px); }
-.face.right  { transform: rotateY(90deg) translateZ(50px); }
-.face.left   { transform: rotateY(-90deg) translateZ(50px); }
-.face.top    { transform: rotateX(90deg) translateZ(50px); }
-.face.bottom { transform: rotateX(-90deg) translateZ(50px); }
-
-@keyframes rotateCube {
-    from { transform: rotateX(0) rotateY(0); }
-    to { transform: rotateX(360deg) rotateY(360deg); }
-}
-
-/* SECTIONS (FEATURES, DOWNLOADS, TUTORIAL) */
+/* ========= ALLGEMEINES SECTION STYLING ========= */
 section {
-    padding: 100px 50px;
-    max-width: 1200px;
+    padding: 80px 5%;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 h2 {
-    font-family: var(--heading-font);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 60px;
-    color: white;
-    text-shadow: 0 0 10px var(--primary-color);
+    color: var(--heading-color);
 }
 
-/* KARTEN-STYLING */
+/* ========= ANIMIERTE KARTEN ========= */
 .features-grid, .download-grid {
     display: grid;
-    gap: 30px;
+    gap: 25px;
 }
 
-.features-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-.download-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.features-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.download-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
-.feature-card, .download-card {
+.animated-card {
     background: var(--card-background);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    padding: 30px;
+    padding: 35px 30px;
     border-radius: 10px;
-    backdrop-filter: blur(5px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
+    overflow: hidden; /* Wichtig für den Hover-Effekt */
+    transition: transform 0.3s ease;
+    text-align: center;
 }
 
-.feature-card:hover, .download-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-}
-
-.feature-card h3, .download-card h3 {
-    font-family: var(--heading-font);
+.animated-card i {
+    font-size: 2.5rem;
     color: var(--primary-color);
-    margin-bottom: 15px;
-    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
 }
 
-/* DOWNLOADS SPEZIFISCH */
+.animated-card h3 {
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+/* Die magische Hover-Animation */
+.animated-card::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from var(--angle), transparent 0%, var(--primary-color) 10%, transparent 20%);
+    animation: rotate 6s linear infinite;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.animated-card:hover::before {
+    opacity: 1;
+}
+
+.animated-card::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: var(--card-background);
+    border-radius: 8px;
+}
+
+/* Inhalt der Karte muss über den Pseudo-Elementen liegen */
+.animated-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
+    to { --angle: 360deg; }
+}
+
 .download-card.latest {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    /* Spezielle Hervorhebung */
 }
 
 .badge {
     position: absolute;
-    top: -15px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     background: var(--primary-color);
     color: var(--background-color);
-    padding: 5px 10px;
+    padding: 3px 8px;
     border-radius: 5px;
-    font-family: var(--heading-font);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .download-button {
-    display: block;
+    display: inline-block;
     margin-top: 20px;
-    padding: 12px 20px;
+    padding: 10px 25px;
     background: transparent;
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     color: var(--primary-color);
-    text-align: center;
     text-decoration: none;
     border-radius: 5px;
-    font-weight: bold;
     transition: all 0.3s ease;
 }
-
 .download-button:hover {
     background: var(--primary-color);
     color: var(--background-color);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
 }
 
-/* TUTORIAL SECTION */
+/* ========= TUTORIAL & FOOTER ========= */
 .tutorial-list {
-    list-style: none;
-    counter-reset: tutorial-counter;
+    list-style-type: none;
     max-width: 800px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
-
 .tutorial-list li {
-    counter-increment: tutorial-counter;
-    margin-bottom: 20px;
-    padding-left: 50px;
-    position: relative;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: 5px;
+    border-left: 3px solid var(--primary-color);
 }
 
-.tutorial-list li::before {
-    content: counter(tutorial-counter);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 30px;
-    height: 30px;
-    background: var(--primary-color);
-    color: var(--background-color);
-    border-radius: 50%;
-    text-align: center;
-    line-height: 30px;
-    font-family: var(--heading-font);
-    font-weight: bold;
-}
-
-/* FOOTER */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 40px 20px;
     margin-top: 50px;
-    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    color: #555;
+    border-top: 1px solid #1a1a1a;
 }
 
-/* SCROLL ANIMATION */
+/* ========= SCROLL-ANIMATIONEN ========= */
 .hidden {
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    filter: blur(5px);
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out;
 }
 
 .show {
     opacity: 1;
+    filter: blur(0);
     transform: translateY(0);
 }
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .subtitle { font-size: 1.2rem; }
-    section { padding: 80px 20px; }
+/* Versetzte Animation für Karten in einem Grid */
+.animated-card {
+    transition-delay: calc(0.1s * var(--i));
 }
